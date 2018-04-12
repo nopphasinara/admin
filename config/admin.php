@@ -158,7 +158,7 @@ return [
     'extensions' => [
 
         'media-manager' => [
-            'disk' => 'uploads'
+            'disk' => 'uploads',
         ],
 
         'api-tester' => [
@@ -169,6 +169,6 @@ return [
             'user_retriever' => function ($id) {
                 return \App\User::find($id);
             },
-        ]
-    ]
+        ],
+    ],
 ];

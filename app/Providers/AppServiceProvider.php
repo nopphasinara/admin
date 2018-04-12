@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Encore\Admin\Config\Config;
 use Encore\Admin\Auth\Database\Administrator;
 use Encore\Admin\Auth\Database\Menu;
 use Encore\Admin\Auth\Database\Permission;
@@ -17,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Config::load();
+        
         $callback = function () {
             return false;
         };

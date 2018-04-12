@@ -25,17 +25,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('inspire')->hourly();
-
         $schedule->command('route:list')->everyTenMinutes();
-
+        
         $schedule->exec('ls -al')->mondays()->at('10:00');
-
         $schedule->exec('date')->mondays()->at('10:00');
-
         $schedule->exec('cal')->weekdays()->at('10:00')->description('Show the calendar');
-
         $schedule->exec('free -m')->monthlyOn(5)->at('10:00');
-
         $schedule->exec('uptime')->everyThirtyMinutes();
     }
 
