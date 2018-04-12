@@ -5,24 +5,24 @@ return [
     /*
      * Laravel-admin name.
      */
-    'name'      => 'Laravel-admin',
+    'name'      => 'Admin',
 
     /*
      * Logo in admin panel header.
      */
-    'logo'      => '<b>Laravel</b> admin',
+    'logo'      => '<b>Control</b> Panel',
 
     /*
      * Mini-logo in admin panel header.
      */
-    'logo-mini' => '<b>La</b>',
+    'logo-mini' => '<b>CP</b>',
 
     /**
      * Route configration.
      */
     'route' => [
 
-        'prefix' => 'demo',
+        'prefix' => 'admin',
 
         'namespace'     => 'App\\Admin\\Controllers',
 
@@ -37,7 +37,7 @@ return [
     /*
      * Laravel-admin html title.
      */
-    'title'  => 'Admin',
+    'title'  => 'Control Panel',
 
     /**
      * Use `https`.
@@ -68,7 +68,7 @@ return [
      */
     'upload'  => [
 
-        'disk' => 'admin',
+        'disk' => 'uploads',
 
         'directory'  => [
             'image'  => 'images',
@@ -82,7 +82,7 @@ return [
     'database' => [
 
         // Database connection for following tables.
-        'connection'  => '',
+        'connection'  => 'mysql',
 
         // User tables and model.
         'users_table' => 'admin_users',
@@ -147,7 +147,7 @@ return [
     |               | sidebar-mini                            |
     |---------------------------------------------------------|
      */
-    'layout'  => ['sidebar-mini'],
+    'layout'  => ['sidebar-expanded', 'sidebar-mini'],
 
     /*
      * Version displayed in footer.
