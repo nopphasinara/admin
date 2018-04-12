@@ -84,7 +84,7 @@ class TagController extends Controller
             ];
 
             $grid->column('switch_group')->switchGroup([
-                'recommend' => '推荐', 'hot' => '热门', 'new' => '最新'
+                'recommend' => 'RECOMMEND', 'hot' => 'HOT', 'new' => 'NEW'
             ], $states);
 
             $grid->created_at();
