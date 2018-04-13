@@ -24,8 +24,15 @@ class CategoryController extends Controller
     {
         return Admin::content(function (Content $content) {
             $content->header('All categories');
+            $content->body(Category::tree(function ($tree) {
+              $tree->branch(function ($branch) {
+                $src = config('admin.upload.host') . '/' . $branch['logo'] ;
+                $logo = "<img src='$src' style='max-width:30px;max-height:30px' class='img'/>";
 
-            $content->body($this->tree());
+                return "{$branch['id']} - {$branch['title']} $logo";
+              });
+            }));
+            // $content->body($this->tree());
         });
     }
 
