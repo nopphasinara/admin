@@ -1,5 +1,593 @@
 [
     {
+        "name": "brackets/admin-auth",
+        "version": "v2.0.1",
+        "version_normalized": "2.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/BRACKETS-by-TRIAD/admin-auth.git",
+            "reference": "623f1d84f3f2df91a823f6e500f925d74df8f50b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/BRACKETS-by-TRIAD/admin-auth/zipball/623f1d84f3f2df91a823f6e500f925d74df8f50b",
+            "reference": "623f1d84f3f2df91a823f6e500f925d74df8f50b",
+            "shasum": ""
+        },
+        "require": {
+            "brackets/admin-ui": "^2.0",
+            "php": ">=7.0.0"
+        },
+        "require-dev": {
+            "orchestra/testbench": "~3.5",
+            "phpunit/phpunit": "~6.3"
+        },
+        "time": "2018-02-15T17:35:55+00:00",
+        "type": "project",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Brackets\\AdminAuth\\AdminAuthServiceProvider"
+                ]
+            },
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [],
+            "psr-4": {
+                "Brackets\\AdminAuth\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Pavol Perdík",
+                "email": "pavol.perdik@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            },
+            {
+                "name": "David Běhal",
+                "email": "david.behal@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            }
+        ],
+        "description": "Authentication interface for brackets/admin-ui",
+        "keywords": [
+            "Authentication",
+            "admin",
+            "auth",
+            "cms",
+            "laravel",
+            "login",
+            "user"
+        ]
+    },
+    {
+        "name": "brackets/admin-generator",
+        "version": "v2.0.1",
+        "version_normalized": "2.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/BRACKETS-by-TRIAD/admin-generator.git",
+            "reference": "00f6473704db8d8923343ac830d312cdb9fd6aa8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/BRACKETS-by-TRIAD/admin-generator/zipball/00f6473704db8d8923343ac830d312cdb9fd6aa8",
+            "reference": "00f6473704db8d8923343ac830d312cdb9fd6aa8",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/dbal": "^2.6.0",
+            "illuminate/console": "5.5.*",
+            "illuminate/support": "5.5.*",
+            "php": ">=7.1.0"
+        },
+        "require-dev": {
+            "orchestra/testbench": "~3.5",
+            "phpunit/phpunit": "~6.3"
+        },
+        "time": "2018-02-28T13:50:15+00:00",
+        "type": "project",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Brackets\\AdminGenerator\\AdminGeneratorServiceProvider"
+                ]
+            },
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [],
+            "psr-4": {
+                "Brackets\\AdminGenerator\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Pavol Perdík",
+                "email": "pavol.perdik@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            },
+            {
+                "name": "Matej Minár",
+                "email": "matej.minar@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            },
+            {
+                "name": "Dušan Subally",
+                "email": "dusan.subally@triad.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            },
+            {
+                "name": "David Běhal",
+                "email": "david.behal@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            }
+        ],
+        "description": "Laravel 5 CRUD generator for brackets/craftable",
+        "keywords": [
+            "admin",
+            "cms",
+            "craftable",
+            "crud",
+            "generator",
+            "laravel",
+            "make"
+        ]
+    },
+    {
+        "name": "brackets/admin-listing",
+        "version": "v2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/BRACKETS-by-TRIAD/admin-listing.git",
+            "reference": "c237ce42279f1d03e893a5bd6d9b7977531a4a2f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/BRACKETS-by-TRIAD/admin-listing/zipball/c237ce42279f1d03e893a5bd6d9b7977531a4a2f",
+            "reference": "c237ce42279f1d03e893a5bd6d9b7977531a4a2f",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "5.5.*",
+            "php": ">=7.0.0"
+        },
+        "require-dev": {
+            "brackets/translatable": "^1.0",
+            "fzaninotto/faker": "~1.4",
+            "mockery/mockery": "0.9.*",
+            "orchestra/testbench": "~3.5",
+            "phpunit/phpunit": "~6.3"
+        },
+        "time": "2017-11-10T23:24:21+00:00",
+        "type": "project",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Brackets\\AdminListing\\AdminListingServiceProvider"
+                ]
+            },
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [],
+            "psr-4": {
+                "Brackets\\AdminListing\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Pavol Perdík",
+                "email": "pavol.perdik@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            }
+        ],
+        "description": "Query-building helper for listing of Eloquent models",
+        "keywords": [
+            "admin",
+            "cms",
+            "datatable",
+            "eloquent",
+            "laravel",
+            "listing"
+        ]
+    },
+    {
+        "name": "brackets/admin-translations",
+        "version": "v2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/BRACKETS-by-TRIAD/admin-translations.git",
+            "reference": "4ede91f56438004283659ca9e8d3554b5546f8e6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/BRACKETS-by-TRIAD/admin-translations/zipball/4ede91f56438004283659ca9e8d3554b5546f8e6",
+            "reference": "4ede91f56438004283659ca9e8d3554b5546f8e6",
+            "shasum": ""
+        },
+        "require": {
+            "brackets/admin-listing": "^2.0",
+            "brackets/admin-ui": "^2.0",
+            "brackets/translatable": "^1.0",
+            "illuminate/console": "5.5.*",
+            "illuminate/container": "5.5.*",
+            "illuminate/contracts": "5.5.*",
+            "illuminate/database": "5.5.*",
+            "illuminate/support": "5.5.*",
+            "php": "^7.0"
+        },
+        "require-dev": {
+            "doctrine/dbal": "~2.5.13",
+            "mockery/mockery": "0.9.*",
+            "orchestra/database": "~3.5",
+            "orchestra/testbench": "~3.5",
+            "phpunit/phpunit": "~6.3"
+        },
+        "time": "2018-01-10T13:22:49+00:00",
+        "type": "project",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Brackets\\AdminTranslations\\AdminTranslationsServiceProvider"
+                ]
+            },
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [],
+            "psr-4": {
+                "Brackets\\AdminTranslations\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Pavol Perdík",
+                "email": "pavol.perdik@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            }
+        ],
+        "description": "Translation manager for brackets/admin-ui",
+        "keywords": [
+            "admin",
+            "cms",
+            "laravel",
+            "localizations",
+            "manager",
+            "translations"
+        ]
+    },
+    {
+        "name": "brackets/admin-ui",
+        "version": "v2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/BRACKETS-by-TRIAD/admin-ui.git",
+            "reference": "64d7bffd30be4355338f5345c01de0d99a40aa19"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/BRACKETS-by-TRIAD/admin-ui/zipball/64d7bffd30be4355338f5345c01de0d99a40aa19",
+            "reference": "64d7bffd30be4355338f5345c01de0d99a40aa19",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "5.5.*",
+            "php": ">=7.0.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "0.9.*",
+            "orchestra/testbench-browser-kit": "3.5.1",
+            "phpunit/phpunit": "~6.3"
+        },
+        "time": "2017-11-27T16:56:28+00:00",
+        "type": "project",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Brackets\\AdminUI\\AdminUIServiceProvider"
+                ]
+            },
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [],
+            "psr-4": {
+                "Brackets\\AdminUI\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Pavol Perdík",
+                "email": "pavol.perdik@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            },
+            {
+                "name": "Matej Minár",
+                "email": "matej.minar@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            },
+            {
+                "name": "Dušan Subally",
+                "email": "dusan.subally@triad.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            }
+        ],
+        "description": "Administration user interface template",
+        "keywords": [
+            "admin",
+            "admin-ui",
+            "administration",
+            "cms",
+            "laravel",
+            "template"
+        ]
+    },
+    {
+        "name": "brackets/craftable",
+        "version": "v2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/BRACKETS-by-TRIAD/craftable.git",
+            "reference": "6063d458de0bf390384c9d0d5b8360e93d83416a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/BRACKETS-by-TRIAD/craftable/zipball/6063d458de0bf390384c9d0d5b8360e93d83416a",
+            "reference": "6063d458de0bf390384c9d0d5b8360e93d83416a",
+            "shasum": ""
+        },
+        "require": {
+            "brackets/admin-auth": "^2.0",
+            "brackets/admin-listing": "^2.0",
+            "brackets/admin-translations": "^2.0",
+            "brackets/admin-ui": "^2.0",
+            "brackets/media": "^1.0",
+            "brackets/translatable": "^1.0",
+            "php": ">=7.0.0",
+            "spatie/laravel-backup": "^5.0",
+            "spatie/laravel-permission": "^2.5"
+        },
+        "time": "2018-01-10T13:27:26+00:00",
+        "type": "project",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Brackets\\Craftable\\CraftableServiceProvider"
+                ]
+            },
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [],
+            "psr-4": {
+                "Brackets\\Craftable\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Pavol Perdík",
+                "email": "pavol.perdik@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            },
+            {
+                "name": "David Běhal",
+                "email": "david.behal@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            }
+        ],
+        "description": "Administration toolkit for Laravel 5 - starting point for developing administration interface",
+        "keywords": [
+            "admin",
+            "administration",
+            "brackets",
+            "cms",
+            "craftable",
+            "crud",
+            "framework",
+            "laravel",
+            "toolkit"
+        ]
+    },
+    {
+        "name": "brackets/media",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/BRACKETS-by-TRIAD/media.git",
+            "reference": "fa17b44a01e11314e8ad2f5562abf0e79055b4c9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/BRACKETS-by-TRIAD/media/zipball/fa17b44a01e11314e8ad2f5562abf0e79055b4c9",
+            "reference": "fa17b44a01e11314e8ad2f5562abf0e79055b4c9",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "5.5.*",
+            "php": "^7.0",
+            "spatie/laravel-medialibrary": "^6.0"
+        },
+        "require-dev": {
+            "orchestra/testbench": "^3.5",
+            "phpunit/phpunit": "^6.3"
+        },
+        "time": "2017-10-17T08:11:10+00:00",
+        "type": "project",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Brackets\\Media\\MediaServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [],
+            "psr-4": {
+                "Brackets\\Media\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Pavol Perdík",
+                "email": "pavol.perdik@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            },
+            {
+                "name": "David Běhal",
+                "email": "david.behal@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            },
+            {
+                "name": "Marek Kratochvíla",
+                "email": "marek.kratochvila@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            }
+        ],
+        "description": "Associate files with Eloquent models",
+        "keywords": [
+            "cms",
+            "images",
+            "laravel",
+            "media",
+            "medialibrary"
+        ]
+    },
+    {
+        "name": "brackets/translatable",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/BRACKETS-by-TRIAD/translatable.git",
+            "reference": "f2fa0218bb130a5799c5076f2e573eaa06ea3258"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/BRACKETS-by-TRIAD/translatable/zipball/f2fa0218bb130a5799c5076f2e573eaa06ea3258",
+            "reference": "f2fa0218bb130a5799c5076f2e573eaa06ea3258",
+            "shasum": ""
+        },
+        "require": {
+            "laravel/framework": "5.5.*",
+            "php": ">=7.0.0",
+            "spatie/laravel-translatable": "^2.0"
+        },
+        "require-dev": {
+            "orchestra/testbench": "^3.5",
+            "phpunit/phpunit": "^6.3"
+        },
+        "time": "2017-09-13T15:55:54+00:00",
+        "type": "project",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Brackets\\Translatable\\TranslatableServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [],
+            "psr-4": {
+                "Brackets\\Translatable\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Pavol Perdík",
+                "email": "pavol.perdik@brackets.sk",
+                "homepage": "https://www.brackets.sk/en",
+                "role": "Developer"
+            }
+        ],
+        "description": "Make your Eloquent models and other content translated into multiple languages",
+        "keywords": [
+            "admin",
+            "cms",
+            "eloquent",
+            "language",
+            "laravel",
+            "locale",
+            "localization",
+            "translate",
+            "translations"
+        ]
+    },
+    {
         "name": "dnoegel/php-xdg-base-dir",
         "version": "0.1",
         "version_normalized": "0.1.0.0",
@@ -33,6 +621,373 @@
             "MIT"
         ],
         "description": "implementation of xdg base directory specification for php"
+    },
+    {
+        "name": "doctrine/annotations",
+        "version": "v1.6.0",
+        "version_normalized": "1.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/annotations.git",
+            "reference": "c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/annotations/zipball/c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5",
+            "reference": "c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/lexer": "1.*",
+            "php": "^7.1"
+        },
+        "require-dev": {
+            "doctrine/cache": "1.*",
+            "phpunit/phpunit": "^6.4"
+        },
+        "time": "2017-12-06T07:11:42+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.6.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Docblock Annotations Parser",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "annotations",
+            "docblock",
+            "parser"
+        ]
+    },
+    {
+        "name": "doctrine/cache",
+        "version": "v1.7.1",
+        "version_normalized": "1.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/cache.git",
+            "reference": "b3217d58609e9c8e661cd41357a54d926c4a2a1a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/cache/zipball/b3217d58609e9c8e661cd41357a54d926c4a2a1a",
+            "reference": "b3217d58609e9c8e661cd41357a54d926c4a2a1a",
+            "shasum": ""
+        },
+        "require": {
+            "php": "~7.1"
+        },
+        "conflict": {
+            "doctrine/common": ">2.2,<2.4"
+        },
+        "require-dev": {
+            "alcaeus/mongo-php-adapter": "^1.1",
+            "mongodb/mongodb": "^1.1",
+            "phpunit/phpunit": "^5.7",
+            "predis/predis": "~1.0"
+        },
+        "suggest": {
+            "alcaeus/mongo-php-adapter": "Required to use legacy MongoDB driver"
+        },
+        "time": "2017-08-25T07:02:50+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.7.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Caching library offering an object-oriented API for many cache backends",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "cache",
+            "caching"
+        ]
+    },
+    {
+        "name": "doctrine/collections",
+        "version": "v1.5.0",
+        "version_normalized": "1.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/collections.git",
+            "reference": "a01ee38fcd999f34d9bfbcee59dbda5105449cbf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/collections/zipball/a01ee38fcd999f34d9bfbcee59dbda5105449cbf",
+            "reference": "a01ee38fcd999f34d9bfbcee59dbda5105449cbf",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1"
+        },
+        "require-dev": {
+            "doctrine/coding-standard": "~0.1@dev",
+            "phpunit/phpunit": "^5.7"
+        },
+        "time": "2017-07-22T10:37:32+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\Common\\Collections\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Collections Abstraction library",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "array",
+            "collections",
+            "iterator"
+        ]
+    },
+    {
+        "name": "doctrine/common",
+        "version": "v2.8.1",
+        "version_normalized": "2.8.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/common.git",
+            "reference": "f68c297ce6455e8fd794aa8ffaf9fa458f6ade66"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/common/zipball/f68c297ce6455e8fd794aa8ffaf9fa458f6ade66",
+            "reference": "f68c297ce6455e8fd794aa8ffaf9fa458f6ade66",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/annotations": "1.*",
+            "doctrine/cache": "1.*",
+            "doctrine/collections": "1.*",
+            "doctrine/inflector": "1.*",
+            "doctrine/lexer": "1.*",
+            "php": "~7.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^5.7"
+        },
+        "time": "2017-08-31T08:43:38+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.8.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Common\\": "lib/Doctrine/Common"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Common Library for Doctrine projects",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "annotations",
+            "collections",
+            "eventmanager",
+            "persistence",
+            "spl"
+        ]
+    },
+    {
+        "name": "doctrine/dbal",
+        "version": "v2.7.1",
+        "version_normalized": "2.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/dbal.git",
+            "reference": "11037b4352c008373561dc6fc836834eed80c3b5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/dbal/zipball/11037b4352c008373561dc6fc836834eed80c3b5",
+            "reference": "11037b4352c008373561dc6fc836834eed80c3b5",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/common": "^2.7.1",
+            "ext-pdo": "*",
+            "php": "^7.1"
+        },
+        "require-dev": {
+            "doctrine/coding-standard": "^4.0",
+            "phpunit/phpunit": "^7.0",
+            "phpunit/phpunit-mock-objects": "!=3.2.4,!=3.2.5",
+            "symfony/console": "^2.0.5||^3.0",
+            "symfony/phpunit-bridge": "^3.4.5|^4.0.5"
+        },
+        "suggest": {
+            "symfony/console": "For helpful console commands such as SQL execution and import of files."
+        },
+        "time": "2018-04-07T18:44:18+00:00",
+        "bin": [
+            "bin/doctrine-dbal"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\DBAL\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            }
+        ],
+        "description": "Database Abstraction Layer",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "database",
+            "dbal",
+            "persistence",
+            "queryobject"
+        ]
     },
     {
         "name": "doctrine/inflector",
@@ -497,6 +1452,73 @@
         ]
     },
     {
+        "name": "guzzlehttp/psr7",
+        "version": "1.4.2",
+        "version_normalized": "1.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/psr7.git",
+            "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+            "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0",
+            "psr/http-message": "~1.0"
+        },
+        "provide": {
+            "psr/http-message-implementation": "1.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2017-03-20T17:10:46+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "GuzzleHttp\\Psr7\\": "src/"
+            },
+            "files": [
+                "src/functions_include.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            },
+            {
+                "name": "Tobias Schultze",
+                "homepage": "https://github.com/Tobion"
+            }
+        ],
+        "description": "PSR-7 message implementation that also provides common utility methods",
+        "keywords": [
+            "http",
+            "message",
+            "request",
+            "response",
+            "stream",
+            "uri",
+            "url"
+        ]
+    },
+    {
         "name": "hamcrest/hamcrest-php",
         "version": "v2.0.0",
         "version_normalized": "2.0.0.0",
@@ -544,6 +1566,78 @@
         "description": "This is the PHP port of Hamcrest Matchers",
         "keywords": [
             "test"
+        ]
+    },
+    {
+        "name": "intervention/image",
+        "version": "2.4.1",
+        "version_normalized": "2.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Intervention/image.git",
+            "reference": "3603dbcc9a17d307533473246a6c58c31cf17919"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Intervention/image/zipball/3603dbcc9a17d307533473246a6c58c31cf17919",
+            "reference": "3603dbcc9a17d307533473246a6c58c31cf17919",
+            "shasum": ""
+        },
+        "require": {
+            "ext-fileinfo": "*",
+            "guzzlehttp/psr7": "~1.1",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "~0.9.2",
+            "phpunit/phpunit": "^4.8 || ^5.7"
+        },
+        "suggest": {
+            "ext-gd": "to use GD library based image processing.",
+            "ext-imagick": "to use Imagick based image processing.",
+            "intervention/imagecache": "Caching extension for the Intervention Image library"
+        },
+        "time": "2017-09-21T16:29:17+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.3-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Intervention\\Image\\ImageServiceProvider"
+                ],
+                "aliases": {
+                    "Image": "Intervention\\Image\\Facades\\Image"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Intervention\\Image\\": "src/Intervention/Image"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Oliver Vogel",
+                "email": "oliver@olivervogel.com",
+                "homepage": "http://olivervogel.com/"
+            }
+        ],
+        "description": "Image handling and manipulation library with support for Laravel integration",
+        "homepage": "http://image.intervention.io/",
+        "keywords": [
+            "gd",
+            "image",
+            "imagick",
+            "laravel",
+            "thumbnail",
+            "watermark"
         ]
     },
     {
@@ -922,6 +2016,69 @@
             "s3",
             "sftp",
             "storage"
+        ]
+    },
+    {
+        "name": "league/glide",
+        "version": "1.3.0",
+        "version_normalized": "1.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thephpleague/glide.git",
+            "reference": "bd29f65c9666abd72e66916e0573801e435ca878"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thephpleague/glide/zipball/bd29f65c9666abd72e66916e0573801e435ca878",
+            "reference": "bd29f65c9666abd72e66916e0573801e435ca878",
+            "shasum": ""
+        },
+        "require": {
+            "intervention/image": "^2.1",
+            "league/flysystem": "^1.0",
+            "php": "^5.4 | ^7.0",
+            "psr/http-message": "^1.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "~0.9",
+            "phpunit/php-token-stream": "^1.4",
+            "phpunit/phpunit": "~4.4"
+        },
+        "time": "2018-02-12T23:28:25+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "League\\Glide\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jonathan Reinink",
+                "email": "jonathan@reinink.ca",
+                "homepage": "http://reinink.ca"
+            }
+        ],
+        "description": "Wonderfully easy on-demand image manipulation library with an HTTP based API.",
+        "homepage": "http://glide.thephpleague.com",
+        "keywords": [
+            "ImageMagick",
+            "editing",
+            "gd",
+            "image",
+            "imagick",
+            "league",
+            "manipulation",
+            "processing"
         ]
     },
     {
@@ -2109,6 +3266,58 @@
         ]
     },
     {
+        "name": "psr/http-message",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/http-message.git",
+            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+            "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-08-06T14:39:51+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Http\\Message\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for HTTP messages",
+        "homepage": "https://github.com/php-fig/http-message",
+        "keywords": [
+            "http",
+            "http-message",
+            "psr",
+            "psr-7",
+            "request",
+            "response"
+        ]
+    },
+    {
         "name": "psr/log",
         "version": "1.0.2",
         "version_normalized": "1.0.2.0",
@@ -2943,6 +4152,561 @@
         ],
         "description": "Library that helps with managing the version number of Git-hosted PHP projects",
         "homepage": "https://github.com/sebastianbergmann/version"
+    },
+    {
+        "name": "spatie/db-dumper",
+        "version": "2.9.0",
+        "version_normalized": "2.9.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/db-dumper.git",
+            "reference": "98a3b7df0186d66a2385f444603dc60ff656a6b9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/db-dumper/zipball/98a3b7df0186d66a2385f444603dc60ff656a6b9",
+            "reference": "98a3b7df0186d66a2385f444603dc60ff656a6b9",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.0",
+            "symfony/process": "^3.0|^4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^6.0"
+        },
+        "time": "2018-03-05T23:49:28+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\DbDumper\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "Dump databases",
+        "homepage": "https://github.com/spatie/db-dumper",
+        "keywords": [
+            "database",
+            "db-dumper",
+            "dump",
+            "mysqldump",
+            "spatie"
+        ]
+    },
+    {
+        "name": "spatie/image",
+        "version": "1.5.0",
+        "version_normalized": "1.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/image.git",
+            "reference": "2ff09d9eafbeccc71f29ee7a9eb6169a856df75e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/image/zipball/2ff09d9eafbeccc71f29ee7a9eb6169a856df75e",
+            "reference": "2ff09d9eafbeccc71f29ee7a9eb6169a856df75e",
+            "shasum": ""
+        },
+        "require": {
+            "league/glide": "^1.2",
+            "php": "^7.0",
+            "spatie/image-optimizer": "^1.0",
+            "spatie/temporary-directory": "^1.0.0",
+            "symfony/process": "^3.0|^4.0"
+        },
+        "require-dev": {
+            "larapack/dd": "^1.1",
+            "phpunit/phpunit": "^6.0|^7.0",
+            "symfony/var-dumper": "^3.2"
+        },
+        "time": "2018-04-13T11:53:18+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\Image\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "Manipulate images with an expressive API",
+        "homepage": "https://github.com/spatie/image",
+        "keywords": [
+            "image",
+            "spatie"
+        ]
+    },
+    {
+        "name": "spatie/image-optimizer",
+        "version": "1.0.14",
+        "version_normalized": "1.0.14.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/image-optimizer.git",
+            "reference": "91603599eb29024cc9849a4a511a629ebce97850"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/91603599eb29024cc9849a4a511a629ebce97850",
+            "reference": "91603599eb29024cc9849a4a511a629ebce97850",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.0",
+            "psr/log": "^1.0",
+            "symfony/process": "^2.8|^3.0|^4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^6.2|^7.0",
+            "symfony/var-dumper": "^3.0|^4.0"
+        },
+        "time": "2018-03-07T13:42:33+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\ImageOptimizer\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "Easily optimize images using PHP",
+        "homepage": "https://github.com/spatie/image-optimizer",
+        "keywords": [
+            "image-optimizer",
+            "spatie"
+        ]
+    },
+    {
+        "name": "spatie/laravel-backup",
+        "version": "5.6.1",
+        "version_normalized": "5.6.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/laravel-backup.git",
+            "reference": "cce6dd735a133beb83864b62e9ac08ab73033be6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/cce6dd735a133beb83864b62e9ac08ab73033be6",
+            "reference": "cce6dd735a133beb83864b62e9ac08ab73033be6",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/console": "~5.5.0|~5.6.0",
+            "illuminate/contracts": "~5.5.0|~5.6.0",
+            "illuminate/events": "~5.5.0|~5.6.0",
+            "illuminate/filesystem": "~5.5.0|~5.6.0",
+            "illuminate/notifications": "~5.5.0|~5.6.0",
+            "illuminate/support": "~5.5.0|~5.6.0",
+            "league/flysystem": "^1.0.27",
+            "php": "^7.0",
+            "spatie/db-dumper": "^2.7",
+            "spatie/temporary-directory": "^1.1",
+            "symfony/finder": "^3.3|^4.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "^1.0",
+            "orchestra/testbench": "~3.5.0|~3.6.0",
+            "phpunit/phpunit": "^6.5 || ^7.0"
+        },
+        "suggest": {
+            "guzzlehttp/guzzle": "Allows notifications to be sent via Slack"
+        },
+        "time": "2018-04-12T09:22:46+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Spatie\\Backup\\BackupServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\Backup\\": "src"
+            },
+            "files": [
+                "src/Helpers/functions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "A Laravel 5 package to backup your application",
+        "homepage": "https://github.com/spatie/laravel-backup",
+        "keywords": [
+            "backup",
+            "database",
+            "laravel-backup",
+            "spatie"
+        ]
+    },
+    {
+        "name": "spatie/laravel-medialibrary",
+        "version": "6.9.0",
+        "version_normalized": "6.9.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/laravel-medialibrary.git",
+            "reference": "28f96fe695763c0f4c145db9ed8cc9d58ceef6e9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/28f96fe695763c0f4c145db9ed8cc9d58ceef6e9",
+            "reference": "28f96fe695763c0f4c145db9ed8cc9d58ceef6e9",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/bus": "~5.5.0|~5.6.0",
+            "illuminate/console": "~5.5.0|~5.6.0",
+            "illuminate/database": "~5.5.0|~5.6.0",
+            "illuminate/pipeline": "~5.5.0|~5.6.0",
+            "illuminate/support": "~5.5.0|~5.6.0",
+            "league/flysystem": "^1.0.8",
+            "php": "^7.0",
+            "spatie/image": "^1.4",
+            "spatie/pdf-to-image": "^1.2",
+            "spatie/temporary-directory": "^1.1"
+        },
+        "conflict": {
+            "php-ffmpeg/php-ffmpeg": "<0.6.1"
+        },
+        "require-dev": {
+            "doctrine/dbal": "^2.5.2",
+            "guzzlehttp/guzzle": "^6.3",
+            "league/flysystem-aws-s3-v3": "^1.0.13",
+            "mockery/mockery": "^1.0.0",
+            "orchestra/testbench": "~3.5.0|~3.6.0",
+            "phpunit/phpunit": "^6.2|^7.0"
+        },
+        "suggest": {
+            "league/flysystem-aws-s3-v3": "Required to use AWS S3 file storage",
+            "php-ffmpeg/php-ffmpeg": "Required for generating video thumbnails"
+        },
+        "time": "2018-03-04T13:01:20+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Spatie\\MediaLibrary\\MediaLibraryServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\MediaLibrary\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be",
+                "homepage": "https://murze.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "Associate files with Eloquent models",
+        "homepage": "https://github.com/spatie/laravel-medialibrary",
+        "keywords": [
+            "cms",
+            "conversion",
+            "downloads",
+            "images",
+            "laravel",
+            "laravel-medialibrary",
+            "media",
+            "spatie"
+        ]
+    },
+    {
+        "name": "spatie/laravel-permission",
+        "version": "2.9.2",
+        "version_normalized": "2.9.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/laravel-permission.git",
+            "reference": "9fdf2e850ff27b1ee9705c5f562d2411a7b5ce43"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/9fdf2e850ff27b1ee9705c5f562d2411a7b5ce43",
+            "reference": "9fdf2e850ff27b1ee9705c5f562d2411a7b5ce43",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/auth": "~5.3.0|~5.4.0|~5.5.0|~5.6.0",
+            "illuminate/container": "~5.3.0|~5.4.0|~5.5.0|~5.6.0",
+            "illuminate/contracts": "~5.3.0|~5.4.0|~5.5.0|~5.6.0",
+            "illuminate/database": "~5.4.0|~5.5.0|~5.6.0",
+            "php": ">=7.0"
+        },
+        "require-dev": {
+            "orchestra/testbench": "~3.3.0|~3.4.2|^3.5.0",
+            "phpunit/phpunit": "^5.7|6.2|^7.0"
+        },
+        "time": "2018-03-12T16:15:16+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Spatie\\Permission\\PermissionServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\Permission\\": "src"
+            },
+            "files": [
+                "src/helpers.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "Permission handling for Laravel 5.4 and up",
+        "homepage": "https://github.com/spatie/laravel-permission",
+        "keywords": [
+            "acl",
+            "laravel",
+            "permission",
+            "security",
+            "spatie"
+        ]
+    },
+    {
+        "name": "spatie/laravel-translatable",
+        "version": "2.2.0",
+        "version_normalized": "2.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/laravel-translatable.git",
+            "reference": "7137981ce04f679d838d99781f39802198128650"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/7137981ce04f679d838d99781f39802198128650",
+            "reference": "7137981ce04f679d838d99781f39802198128650",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/database": "~5.5.0|~5.6.0",
+            "illuminate/support": "~5.5.0|~5.6.0",
+            "php": "^7.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "^1.0",
+            "orchestra/testbench": "~3.5.0|~3.6.0",
+            "phpunit/phpunit": "^6.3|^7.0"
+        },
+        "time": "2018-03-10T00:12:53+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Spatie\\Translatable\\TranslatableServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\Translatable\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Sebastian De Deyne",
+                "email": "sebastian@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            },
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            },
+            {
+                "name": "Mohamed Said",
+                "email": "theMohamedSaid@gmail.com",
+                "role": "Original idea"
+            }
+        ],
+        "description": "A trait to make an Eloquent model hold translations",
+        "homepage": "https://github.com/spatie/laravel-translatable",
+        "keywords": [
+            "eloquent",
+            "i8n",
+            "laravel-translatable",
+            "model",
+            "multilingual",
+            "spatie",
+            "translate"
+        ]
+    },
+    {
+        "name": "spatie/pdf-to-image",
+        "version": "1.2.2",
+        "version_normalized": "1.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/pdf-to-image.git",
+            "reference": "9a5cb264a99e87e010c65d4ece03b51f821d55bd"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/pdf-to-image/zipball/9a5cb264a99e87e010c65d4ece03b51f821d55bd",
+            "reference": "9a5cb264a99e87e010c65d4ece03b51f821d55bd",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "scrutinizer/ocular": "~1.1"
+        },
+        "time": "2016-12-14T15:37:00+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\PdfToImage\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "Convert a pdf to an image",
+        "homepage": "https://github.com/spatie/pdf-to-image",
+        "keywords": [
+            "convert",
+            "image",
+            "pdf",
+            "pdf-to-image",
+            "spatie"
+        ]
+    },
+    {
+        "name": "spatie/temporary-directory",
+        "version": "1.1.4",
+        "version_normalized": "1.1.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/temporary-directory.git",
+            "reference": "5e1799fa2297363ebfb4df296fea90afbd4ef9b7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/temporary-directory/zipball/5e1799fa2297363ebfb4df296fea90afbd4ef9b7",
+            "reference": "5e1799fa2297363ebfb4df296fea90afbd4ef9b7",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^6.3"
+        },
+        "time": "2018-04-12T09:34:43+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\TemporaryDirectory\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Alex Vanderbist",
+                "email": "alex@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "Easily create, use and destroy temporary directories",
+        "homepage": "https://github.com/spatie/temporary-directory",
+        "keywords": [
+            "spatie",
+            "temporary-directory"
+        ]
     },
     {
         "name": "swiftmailer/swiftmailer",
