@@ -36,6 +36,9 @@ Route::group([
         'china/province'        => China\ProvinceController::class,
         'china/city'            => China\CityController::class,
         'china/district'        => China\DistrictController::class,
+
+        // Listing
+        'locations' => LocationController::class,
     ]);
 
     $router->post('posts/release', 'PostController@release');

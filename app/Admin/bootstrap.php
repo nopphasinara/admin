@@ -26,6 +26,9 @@ Column::extend('floatBar', FloatBar::class);
 Column::extend('qrcode', Qrcode::class);
 Column::extend('urlWrapper', UrlWrapper::class);
 Column::extend('action', Grid\Displayers\Actions::class);
+Column::extend('color', function ($value, $color) {
+    return "<span style='color: $color'>$value</span>";
+});
 
 Column::extend('prependIcon', function ($value, $icon) {
 
