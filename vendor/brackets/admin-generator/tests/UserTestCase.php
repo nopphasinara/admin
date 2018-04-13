@@ -55,56 +55,56 @@ abstract class UserTestCase extends Orchestra
             'role_has_permissions' => 'role_has_permissions',
         ];
 
-        $app['db']->connection()->getSchemaBuilder()->create($tableNames['permissions'], function (Blueprint $table) {
+        $app['db']->connection()->getSchemaBuilder()->create('permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('guard_name');
             $table->timestamps();
         });
 
-        $app['db']->connection()->getSchemaBuilder()->create($tableNames['roles'], function (Blueprint $table) {
+        $app['db']->connection()->getSchemaBuilder()->create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('guard_name');
             $table->timestamps();
         });
 
-        $app['db']->connection()->getSchemaBuilder()->create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames) {
+        $app['db']->connection()->getSchemaBuilder()->create('model_has_permissions', function (Blueprint $table) use ($tableNames) {
             $table->integer('permission_id')->unsigned();
             $table->morphs('model');
 
             $table->foreign('permission_id')
                 ->references('id')
-                ->on($tableNames['permissions'])
+                ->on('permissions')
                 ->onDelete('cascade');
 
             $table->primary(['permission_id', 'model_id', 'model_type']);
         });
 
-        $app['db']->connection()->getSchemaBuilder()->create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames) {
+        $app['db']->connection()->getSchemaBuilder()->create('model_has_roles', function (Blueprint $table) use ($tableNames) {
             $table->integer('role_id')->unsigned();
             $table->morphs('model');
 
             $table->foreign('role_id')
                 ->references('id')
-                ->on($tableNames['roles'])
+                ->on('roles')
                 ->onDelete('cascade');
 
             $table->primary(['role_id', 'model_id', 'model_type']);
         });
 
-        $app['db']->connection()->getSchemaBuilder()->create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames) {
+        $app['db']->connection()->getSchemaBuilder()->create('role_has_permissions', function (Blueprint $table) use ($tableNames) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
 
             $table->foreign('permission_id')
                 ->references('id')
-                ->on($tableNames['permissions'])
+                ->on('permissions')
                 ->onDelete('cascade');
 
             $table->foreign('role_id')
                 ->references('id')
-                ->on($tableNames['roles'])
+                ->on('roles')
                 ->onDelete('cascade');
 
             $table->primary(['permission_id', 'role_id']);
