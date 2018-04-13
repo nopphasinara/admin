@@ -11,10 +11,14 @@ use Encore\Admin\Grid;
 use Encore\Admin\Form;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Grid\Column;
+// use App\Admin\Extensions\Form\PHPEditor;
+// use App\Admin\Extensions\Form\CKEditor;
 
 Form::forget(['map', 'editor']);
 
 Form::extend('editor', WangEditor::class);
+// Form::extend('php', PHPEditor::class);
+// Form::extend('ckeditor', CKEditor::class);
 
 Admin::css('/vendor/prism/prism.css');
 Admin::js('/vendor/prism/prism.js');

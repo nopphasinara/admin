@@ -95,4 +95,11 @@ class CityController extends Controller
             $form->text('name');
         });
     }
+
+    public function city(Request $request)
+    {
+      $provinceId = $request->get('q');
+
+      return ChinaArea::city()->where('parent_id', $provinceId)->get(['id', DB::raw('name as text')]);
+    }
 }

@@ -15,6 +15,10 @@ class Location extends Model
 
   protected $table = 'locations';
 
+  protected $casts = [
+    'latlng' => 'json',
+  ];
+
   public $sortable = [
       'order_column_name' => 'order_no',
       'sort_when_creating' => true,
@@ -33,5 +37,17 @@ class Location extends Model
   public function form($callback)
   {
     return new Form(new static, $callback);
+  }
+
+  public function setImagesAttribute($images)
+  {
+    if (is_array($images)) {
+      $this->attributes['images'] = json_encode($images);
+    }
+  }
+
+  public function getImagesAttribute($images)
+  {
+    return json_decode($images, true);
   }
 }

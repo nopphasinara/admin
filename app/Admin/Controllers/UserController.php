@@ -192,5 +192,11 @@ class UserController extends Controller
             $form->ignore(['password_confirmation']);
         });
     }
-}
 
+    public function users(Request $request)
+    {
+      $q = $request->get('q');
+      
+      return User::where('name', 'like', "%$q%")->paginate(null, ['id', 'name as text']);
+    }
+}
