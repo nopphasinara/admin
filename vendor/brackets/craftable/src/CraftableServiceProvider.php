@@ -20,7 +20,7 @@ class CraftableServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             if (! class_exists('FillDefaultUserAndPermissions')) {
-                $timestamp = date('Y_m_d_His', time() + 5);
+                $timestamp = date('Y_m_d_His', time() + rand(0, 1000000));
 
                 $this->publishes([
                     __DIR__.'/../install-stubs/database/migrations/fill_default_user_and_permissions.php' => database_path('migrations').'/'.$timestamp.'_fill_default_user_and_permissions.php',

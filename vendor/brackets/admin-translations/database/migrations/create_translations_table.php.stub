@@ -19,8 +19,8 @@ class CreateTranslationsTable extends Migration
             $table->string('group');
             $table->index('group');
             $table->string('key');
-            $table->jsonb('text');
-            $table->jsonb('metadata')->nullable();
+            $table->string('text');
+            $table->string('metadata')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -86,8 +86,8 @@ abstract class TestCase extends Test
             $table->increments('id');
             $table->integer('number');
             $table->dateTime('published_at');
-            $table->jsonb('name')->nullable();
-            $table->jsonb('color')->nullable();
+            $table->string('name')->nullable();
+            $table->string('color')->nullable();
         });
 
         TestTranslatableModel::create([
