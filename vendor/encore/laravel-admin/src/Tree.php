@@ -35,8 +35,8 @@ class Tree implements Renderable
      * @var string
      */
     protected $view = [
-        'tree'      => 'admin::tree',
-        'branch'    => 'admin::tree.branch',
+        'tree'   => 'admin::tree',
+        'branch' => 'admin::tree.branch',
     ];
 
     /**
@@ -53,6 +53,16 @@ class Tree implements Renderable
      * @var bool
      */
     public $useCreate = true;
+
+    /**
+     * @var bool
+     */
+    public $useSave = true;
+
+    /**
+     * @var bool
+     */
+    public $useRefresh = true;
 
     /**
      * @var array
@@ -160,6 +170,26 @@ class Tree implements Renderable
     public function disableCreate()
     {
         $this->useCreate = false;
+    }
+
+    /**
+     * Disable save.
+     *
+     * @return void
+     */
+    public function disableSave()
+    {
+        $this->useSave = false;
+    }
+
+    /**
+     * Disable refresh.
+     *
+     * @return void
+     */
+    public function disableRefresh()
+    {
+        $this->useRefresh = false;
     }
 
     /**
@@ -297,10 +327,12 @@ SCRIPT;
     public function variables()
     {
         return [
-            'id'        => $this->elementId,
-            'tools'     => $this->tools->render(),
-            'items'     => $this->getItems(),
-            'useCreate' => $this->useCreate,
+            'id'         => $this->elementId,
+            'tools'      => $this->tools->render(),
+            'items'      => $this->getItems(),
+            'useCreate'  => $this->useCreate,
+            'useSave'    => $this->useSave,
+            'useRefresh' => $this->useRefresh,
         ];
     }
 

@@ -40,6 +40,7 @@ class MenuController extends Controller
                     $form->icon('icon', trans('admin.icon'))->default('fa-bars')->rules('required')->help($this->iconHelp());
                     $form->text('uri', trans('admin.uri'));
                     $form->multipleSelect('roles', trans('admin.roles'))->options(Role::all()->pluck('name', 'id'));
+                    $form->hidden('_token')->default(csrf_token());
 
                     $column->append((new Box(trans('admin.new'), $form))->style('success'));
                 });
@@ -56,9 +57,7 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        return redirect()->action(
-            '\Encore\Admin\Controllers\MenuController@edit', ['id' => $id]
-        );
+        return redirect()->route('menu.edit', ['id' => $id]);
     }
 
     /**
@@ -73,7 +72,11 @@ class MenuController extends Controller
                 $payload = "<i class='fa {$branch['icon']}'></i>&nbsp;<strong>{$branch['title']}</strong>";
 
                 if (!isset($branch['children'])) {
-                    $uri = admin_base_path($branch['uri']);
+                    if (url()->isValidUrl($branch['uri'])) {
+                        $uri = $branch['uri'];
+                    } else {
+                        $uri = admin_base_path($branch['uri']);
+                    }
 
                     $payload .= "&nbsp;&nbsp;&nbsp;<a href=\"$uri\" class=\"dd-nodrag\">$uri</a>";
                 }

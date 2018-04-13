@@ -17,8 +17,8 @@ class CleanupHasFailed extends BaseNotification
     {
         $mailMessage = (new MailMessage)
             ->error()
-            ->subject(trans('backup::notifications.cleanup_failed_subject', ['application_name', $this->applicationName()]))
-            ->line(trans('backup::notifications.cleanup_failed_body', ['application_name', $this->applicationName()]))
+            ->subject(trans('backup::notifications.cleanup_failed_subject', ['application_name' => $this->applicationName()]))
+            ->line(trans('backup::notifications.cleanup_failed_body', ['application_name' => $this->applicationName()]))
             ->line(trans('backup::notifications.exception_message', ['message' => $this->event->exception->getMessage()]))
             ->line(trans('backup::notifications.exception_trace', ['trace' => $this->event->exception->getTraceAsString()]));
 
@@ -33,8 +33,9 @@ class CleanupHasFailed extends BaseNotification
     {
         return (new SlackMessage)
             ->error()
+            ->from(config('backup.notifications.slack.username'), config('backup.notifications.slack.icon'))
             ->to(config('backup.notifications.slack.channel'))
-            ->content(trans('backup::notifications.cleanup_failed_subject', ['application_name', $this->applicationName()]))
+            ->content(trans('backup::notifications.cleanup_failed_subject', ['application_name' => $this->applicationName()]))
             ->attachment(function (SlackAttachment $attachment) {
                 $attachment
                     ->title(trans('backup::notifications.exception_message_title'))

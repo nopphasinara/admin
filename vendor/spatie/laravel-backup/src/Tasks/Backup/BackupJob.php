@@ -44,56 +44,66 @@ class BackupJob
         $this->backupDestinations = new Collection();
     }
 
-    public function dontBackupFilesystem(): BackupJob
+    public function dontBackupFilesystem(): self
     {
         $this->fileSelection = FileSelection::create();
 
         return $this;
     }
 
-    public function dontBackupDatabases(): BackupJob
+    public function onlyDbName(array $allowedDbNames): self
+    {
+        $this->dbDumpers = $this->dbDumpers->filter(
+            function (DbDumper $dbDumper, string $connectionName) use ($allowedDbNames) {
+                return in_array($connectionName, $allowedDbNames);
+            });
+
+        return $this;
+    }
+
+    public function dontBackupDatabases(): self
     {
         $this->dbDumpers = new Collection();
 
         return $this;
     }
 
-    public function disableNotifications(): BackupJob
+    public function disableNotifications(): self
     {
         $this->sendNotifications = false;
 
         return $this;
     }
 
-    public function setDefaultFilename(): BackupJob
+    public function setDefaultFilename(): self
     {
         $this->filename = Carbon::now()->format('Y-m-d-H-i-s').'.zip';
 
         return $this;
     }
 
-    public function setFileSelection(FileSelection $fileSelection): BackupJob
+    public function setFileSelection(FileSelection $fileSelection): self
     {
         $this->fileSelection = $fileSelection;
 
         return $this;
     }
 
-    public function setDbDumpers(Collection $dbDumpers): BackupJob
+    public function setDbDumpers(Collection $dbDumpers): self
     {
         $this->dbDumpers = $dbDumpers;
 
         return $this;
     }
 
-    public function setFilename(string $filename): BackupJob
+    public function setFilename(string $filename): self
     {
         $this->filename = $filename;
 
         return $this;
     }
 
-    public function onlyBackupTo(string $diskName): BackupJob
+    public function onlyBackupTo(string $diskName): self
     {
         $this->backupDestinations = $this->backupDestinations->filter(function (BackupDestination $backupDestination) use ($diskName) {
             return $backupDestination->diskName() === $diskName;
@@ -106,7 +116,7 @@ class BackupJob
         return $this;
     }
 
-    public function setBackupDestinations(Collection $backupDestinations): BackupJob
+    public function setBackupDestinations(Collection $backupDestinations): self
     {
         $this->backupDestinations = $backupDestinations;
 
@@ -115,7 +125,7 @@ class BackupJob
 
     public function run()
     {
-        $this->temporaryDirectory = (new TemporaryDirectory(storage_path('app/backup')))
+        $this->temporaryDirectory = (new TemporaryDirectory(storage_path('app/backup-temp')))
             ->name('temp')
             ->force()
             ->create()
@@ -139,6 +149,10 @@ class BackupJob
             consoleOutput()->error("Backup failed because {$exception->getMessage()}.".PHP_EOL.$exception->getTraceAsString());
 
             $this->sendNotification(new BackupHasFailed($exception));
+
+            $this->temporaryDirectory->delete();
+
+            throw $exception;
         }
 
         $this->temporaryDirectory->delete();

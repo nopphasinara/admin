@@ -66,14 +66,14 @@ use Symfony\Component\HttpFoundation\Response;
  * @method Field\MultipleImage  multipleImage($column, $label = '')
  * @method Field\MultipleFile   multipleFile($column, $label = '')
  * @method Field\Captcha        captcha($column, $label = '')
- * @method Field\ListBox        listbox($column, $label = '')
+ * @method Field\Listbox        listbox($column, $label = '')
  */
 class Form
 {
     /**
      * Eloquent model of the form.
      *
-     * @var
+     * @var Model
      */
     protected $model;
 
@@ -502,6 +502,8 @@ class Form
     {
         $data = Input::all();
 
+        $isEditable = $this->isEditable($data);
+
         $data = $this->handleEditable($data);
 
         $data = $this->handleFileDelete($data);
@@ -520,7 +522,11 @@ class Form
 
         // Handle validation errors.
         if ($validationMessages = $this->validationMessages($data)) {
-            return back()->withInput()->withErrors($validationMessages);
+            if (!$isEditable) {
+                return back()->withInput()->withErrors($validationMessages);
+            } else {
+                return response()->json(['errors' => array_dot($validationMessages->getMessages())], 422);
+            }
         }
 
         if (($response = $this->prepare($data)) instanceof Response) {
@@ -563,6 +569,18 @@ class Form
         $url = Input::get(Builder::PREVIOUS_URL_KEY) ?: $this->resource(-1);
 
         return redirect($url);
+    }
+
+    /**
+     * Check if request is from editable.
+     *
+     * @param array $input
+     *
+     * @return bool
+     */
+    protected function isEditable(array $input = [])
+    {
+        return array_key_exists('_editable', $input);
     }
 
     /**
@@ -641,10 +659,10 @@ class Form
 
             $relation = $this->model->$name();
 
-            $hasDot = $relation instanceof \Illuminate\Database\Eloquent\Relations\HasOne
+            $oneToOneRelation = $relation instanceof \Illuminate\Database\Eloquent\Relations\HasOne
                 || $relation instanceof \Illuminate\Database\Eloquent\Relations\MorphOne;
 
-            $prepared = $this->prepareUpdate([$name => $values], $hasDot);
+            $prepared = $this->prepareUpdate([$name => $values], $oneToOneRelation);
 
             if (empty($prepared)) {
                 continue;
@@ -715,39 +733,36 @@ class Form
      * Prepare input data for update.
      *
      * @param array $updates
-     * @param bool  $hasDot  If column name contains a 'dot', only has-one relation column use this.
+     * @param bool  $oneToOneRelation If column is one-to-one relation.
      *
      * @return array
      */
-    protected function prepareUpdate(array $updates, $hasDot = false)
+    protected function prepareUpdate(array $updates, $oneToOneRelation = false)
     {
         $prepared = [];
 
         foreach ($this->builder->fields() as $field) {
             $columns = $field->column();
 
-            if ($this->invalidColumn($columns, $hasDot)) {
+            // If column not in input array data, then continue.
+            if (!array_has($updates, $columns)) {
+                continue;
+            }
+
+            if ($this->invalidColumn($columns, $oneToOneRelation)) {
                 continue;
             }
 
             $value = $this->getDataByColumn($updates, $columns);
 
-            if ($value !== '' && $value !== '0' && empty($value)) {
-                continue;
-            }
+            $value = $field->prepare($value);
 
-            if (method_exists($field, 'prepare')) {
-                $value = $field->prepare($value);
-            }
-
-            if ($value != $field->original()) {
-                if (is_array($columns)) {
-                    foreach ($columns as $name => $column) {
-                        array_set($prepared, $column, $value[$name]);
-                    }
-                } elseif (is_string($columns)) {
-                    array_set($prepared, $columns, $value);
+            if (is_array($columns)) {
+                foreach ($columns as $name => $column) {
+                    array_set($prepared, $column, $value[$name]);
                 }
+            } elseif (is_string($columns)) {
+                array_set($prepared, $columns, $value);
             }
         }
 
@@ -756,15 +771,15 @@ class Form
 
     /**
      * @param string|array $columns
-     * @param bool         $hasDot
+     * @param bool         $oneToOneRelation
      *
      * @return bool
      */
-    public function invalidColumn($columns, $hasDot = false)
+    protected function invalidColumn($columns, $oneToOneRelation = false)
     {
         foreach ((array) $columns as $column) {
-            if ((!$hasDot && Str::contains($column, '.')) ||
-                ($hasDot && !Str::contains($column, '.'))) {
+            if ((!$oneToOneRelation && Str::contains($column, '.')) ||
+                ($oneToOneRelation && !Str::contains($column, '.'))) {
                 return true;
             }
         }
@@ -791,9 +806,7 @@ class Form
                 continue;
             }
 
-            if (method_exists($field, 'prepare')) {
-                $inserts[$column] = $field->prepare($value);
-            }
+            $inserts[$column] = $field->prepare($value);
         }
 
         $prepared = [];
@@ -929,6 +942,8 @@ class Form
      */
     protected function setFieldOriginalValue()
     {
+//        static::doNotSnakeAttributes($this->model);
+
         $values = $this->model->toArray();
 
         $this->builder->fields()->each(function (Field $field) use ($values) {
@@ -949,11 +964,27 @@ class Form
 
         $this->model = $this->model->with($relations)->findOrFail($id);
 
+//        static::doNotSnakeAttributes($this->model);
+
         $data = $this->model->toArray();
 
         $this->builder->fields()->each(function (Field $field) use ($data) {
             $field->fill($data);
         });
+    }
+
+    /**
+     * Don't snake case attributes.
+     *
+     * @param Model $model
+     *
+     * @return void
+     */
+    protected static function doNotSnakeAttributes(Model $model)
+    {
+        $class = get_class($model);
+
+        $class::$snakeAttributes = false;
     }
 
     /**
@@ -1022,7 +1053,9 @@ class Form
                 ) {
                     $relations[] = $relation;
                 }
-            } elseif (method_exists($this->model, $column)) {
+            } elseif (method_exists($this->model, $column) &&
+                !method_exists(Model::class, $column)
+            ) {
                 $relations[] = $column;
             }
         }
@@ -1099,9 +1132,7 @@ class Form
      */
     public function tools(Closure $callback)
     {
-        $callback = $callback->bindTo($this);
-
-        call_user_func($callback, $this->builder->getTools());
+        $callback->call($this, $this->builder->getTools());
     }
 
     /**
@@ -1185,52 +1216,52 @@ class Form
     public static function registerBuiltinFields()
     {
         $map = [
-            'button'            => \Encore\Admin\Form\Field\Button::class,
-            'checkbox'          => \Encore\Admin\Form\Field\Checkbox::class,
-            'color'             => \Encore\Admin\Form\Field\Color::class,
-            'currency'          => \Encore\Admin\Form\Field\Currency::class,
-            'date'              => \Encore\Admin\Form\Field\Date::class,
-            'dateRange'         => \Encore\Admin\Form\Field\DateRange::class,
-            'datetime'          => \Encore\Admin\Form\Field\Datetime::class,
-            'dateTimeRange'     => \Encore\Admin\Form\Field\DatetimeRange::class,
-            'datetimeRange'     => \Encore\Admin\Form\Field\DatetimeRange::class,
-            'decimal'           => \Encore\Admin\Form\Field\Decimal::class,
-            'display'           => \Encore\Admin\Form\Field\Display::class,
-            'divider'           => \Encore\Admin\Form\Field\Divide::class,
-            'divide'            => \Encore\Admin\Form\Field\Divide::class,
-            'embeds'            => \Encore\Admin\Form\Field\Embeds::class,
-            'editor'            => \Encore\Admin\Form\Field\Editor::class,
-            'email'             => \Encore\Admin\Form\Field\Email::class,
-            'file'              => \Encore\Admin\Form\Field\File::class,
-            'hasMany'           => \Encore\Admin\Form\Field\HasMany::class,
-            'hidden'            => \Encore\Admin\Form\Field\Hidden::class,
-            'id'                => \Encore\Admin\Form\Field\Id::class,
-            'image'             => \Encore\Admin\Form\Field\Image::class,
-            'ip'                => \Encore\Admin\Form\Field\Ip::class,
-            'map'               => \Encore\Admin\Form\Field\Map::class,
-            'mobile'            => \Encore\Admin\Form\Field\Mobile::class,
-            'month'             => \Encore\Admin\Form\Field\Month::class,
-            'multipleSelect'    => \Encore\Admin\Form\Field\MultipleSelect::class,
-            'number'            => \Encore\Admin\Form\Field\Number::class,
-            'password'          => \Encore\Admin\Form\Field\Password::class,
-            'radio'             => \Encore\Admin\Form\Field\Radio::class,
-            'rate'              => \Encore\Admin\Form\Field\Rate::class,
-            'select'            => \Encore\Admin\Form\Field\Select::class,
-            'slider'            => \Encore\Admin\Form\Field\Slider::class,
-            'switch'            => \Encore\Admin\Form\Field\SwitchField::class,
-            'text'              => \Encore\Admin\Form\Field\Text::class,
-            'textarea'          => \Encore\Admin\Form\Field\Textarea::class,
-            'time'              => \Encore\Admin\Form\Field\Time::class,
-            'timeRange'         => \Encore\Admin\Form\Field\TimeRange::class,
-            'url'               => \Encore\Admin\Form\Field\Url::class,
-            'year'              => \Encore\Admin\Form\Field\Year::class,
-            'html'              => \Encore\Admin\Form\Field\Html::class,
-            'tags'              => \Encore\Admin\Form\Field\Tags::class,
-            'icon'              => \Encore\Admin\Form\Field\Icon::class,
-            'multipleFile'      => \Encore\Admin\Form\Field\MultipleFile::class,
-            'multipleImage'     => \Encore\Admin\Form\Field\MultipleImage::class,
-            'captcha'           => \Encore\Admin\Form\Field\Captcha::class,
-            'listbox'           => \Encore\Admin\Form\Field\ListBox::class,
+            'button'         => \Encore\Admin\Form\Field\Button::class,
+            'checkbox'       => \Encore\Admin\Form\Field\Checkbox::class,
+            'color'          => \Encore\Admin\Form\Field\Color::class,
+            'currency'       => \Encore\Admin\Form\Field\Currency::class,
+            'date'           => \Encore\Admin\Form\Field\Date::class,
+            'dateRange'      => \Encore\Admin\Form\Field\DateRange::class,
+            'datetime'       => \Encore\Admin\Form\Field\Datetime::class,
+            'dateTimeRange'  => \Encore\Admin\Form\Field\DatetimeRange::class,
+            'datetimeRange'  => \Encore\Admin\Form\Field\DatetimeRange::class,
+            'decimal'        => \Encore\Admin\Form\Field\Decimal::class,
+            'display'        => \Encore\Admin\Form\Field\Display::class,
+            'divider'        => \Encore\Admin\Form\Field\Divide::class,
+            'divide'         => \Encore\Admin\Form\Field\Divide::class,
+            'embeds'         => \Encore\Admin\Form\Field\Embeds::class,
+            'editor'         => \Encore\Admin\Form\Field\Editor::class,
+            'email'          => \Encore\Admin\Form\Field\Email::class,
+            'file'           => \Encore\Admin\Form\Field\File::class,
+            'hasMany'        => \Encore\Admin\Form\Field\HasMany::class,
+            'hidden'         => \Encore\Admin\Form\Field\Hidden::class,
+            'id'             => \Encore\Admin\Form\Field\Id::class,
+            'image'          => \Encore\Admin\Form\Field\Image::class,
+            'ip'             => \Encore\Admin\Form\Field\Ip::class,
+            'map'            => \Encore\Admin\Form\Field\Map::class,
+            'mobile'         => \Encore\Admin\Form\Field\Mobile::class,
+            'month'          => \Encore\Admin\Form\Field\Month::class,
+            'multipleSelect' => \Encore\Admin\Form\Field\MultipleSelect::class,
+            'number'         => \Encore\Admin\Form\Field\Number::class,
+            'password'       => \Encore\Admin\Form\Field\Password::class,
+            'radio'          => \Encore\Admin\Form\Field\Radio::class,
+            'rate'           => \Encore\Admin\Form\Field\Rate::class,
+            'select'         => \Encore\Admin\Form\Field\Select::class,
+            'slider'         => \Encore\Admin\Form\Field\Slider::class,
+            'switch'         => \Encore\Admin\Form\Field\SwitchField::class,
+            'text'           => \Encore\Admin\Form\Field\Text::class,
+            'textarea'       => \Encore\Admin\Form\Field\Textarea::class,
+            'time'           => \Encore\Admin\Form\Field\Time::class,
+            'timeRange'      => \Encore\Admin\Form\Field\TimeRange::class,
+            'url'            => \Encore\Admin\Form\Field\Url::class,
+            'year'           => \Encore\Admin\Form\Field\Year::class,
+            'html'           => \Encore\Admin\Form\Field\Html::class,
+            'tags'           => \Encore\Admin\Form\Field\Tags::class,
+            'icon'           => \Encore\Admin\Form\Field\Icon::class,
+            'multipleFile'   => \Encore\Admin\Form\Field\MultipleFile::class,
+            'multipleImage'  => \Encore\Admin\Form\Field\MultipleImage::class,
+            'captcha'        => \Encore\Admin\Form\Field\Captcha::class,
+            'listbox'        => \Encore\Admin\Form\Field\Listbox::class,
         ];
 
         foreach ($map as $abstract => $class) {

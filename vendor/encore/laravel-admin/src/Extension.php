@@ -19,14 +19,12 @@ abstract class Extension
 
     public static function import()
     {
-        
     }
 
     protected static function routes($callback)
     {
         /* @var \Illuminate\Routing\Router $router */
         Route::group(['prefix' => config('admin.route.prefix')], function ($router) use ($callback) {
-
             $attributes = array_merge([
                 'middleware' => config('admin.route.middleware'),
             ], static::config('route', []));
@@ -51,9 +49,9 @@ abstract class Extension
     protected static function createPermission($name, $slug, $path)
     {
         Permission::create([
-            'name'          => $name,
-            'slug'          => $slug,
-            'http_path'     => '/'.trim($path, '/'),
+            'name'      => $name,
+            'slug'      => $slug,
+            'http_path' => '/'.trim($path, '/'),
         ]);
     }
 }

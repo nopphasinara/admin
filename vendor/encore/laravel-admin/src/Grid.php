@@ -158,13 +158,18 @@ class Grid
      * @var array
      */
     protected $options = [
-        'usePagination'     => true,
-        'useFilter'         => true,
-        'useExporter'       => true,
-        'useActions'        => true,
-        'useRowSelector'    => true,
-        'allowCreate'       => true,
+        'usePagination'  => true,
+        'useFilter'      => true,
+        'useExporter'    => true,
+        'useActions'     => true,
+        'useRowSelector' => true,
+        'allowCreate'    => true,
     ];
+
+    /**
+     * @var Tools\Footer
+     */
+    protected $footer;
 
     /**
      * Create a new grid instance.
@@ -211,7 +216,6 @@ class Grid
     protected function setupExporter()
     {
         if ($scope = Input::get(Exporter::$queryName)) {
-
             $this->model()->usePaginate(false);
 
             call_user_func($this->builder, $this);
@@ -641,8 +645,9 @@ class Grid
     /**
      * Get the export url.
      *
-     * @param int $scope
+     * @param int  $scope
      * @param null $args
+     *
      * @return string
      */
     public function exportUrl($scope = 1, $args = null)
@@ -683,11 +688,23 @@ class Grid
     }
 
     /**
-     * Disable creation.
+     * Alias for method `disableCreateButton`.
+     *
+     * @return $this
+     *
+     * @deprecated
+     */
+    public function disableCreation()
+    {
+        return $this->disableCreateButton();
+    }
+
+    /**
+     * Remove create button on grid.
      *
      * @return $this
      */
-    public function disableCreation()
+    public function disableCreateButton()
     {
         return $this->option('allowCreate', false);
     }
@@ -712,8 +729,13 @@ class Grid
         return new Tools\CreateButton($this);
     }
 
-    protected $footer;
-
+    /**
+     * Set grid footer.
+     *
+     * @param Closure|null $closure
+     *
+     * @return $this|Tools\Footer
+     */
     public function footer(Closure $closure = null)
     {
         if (!$closure) {
@@ -725,6 +747,11 @@ class Grid
         return $this;
     }
 
+    /**
+     * Render grid footer.
+     *
+     * @return Tools\Footer|string
+     */
     public function renderFooter()
     {
         if (!$this->footer) {
@@ -754,7 +781,6 @@ class Grid
         }
 
         return app('request')->getPathInfo();
-        //return app('router')->current()->getPath();
     }
 
     /**
@@ -881,19 +907,19 @@ class Grid
     public static function registerColumnDisplayer()
     {
         $map = [
-            'editable'      => \Encore\Admin\Grid\Displayers\Editable::class,
-            'switch'        => \Encore\Admin\Grid\Displayers\SwitchDisplay::class,
-            'switchGroup'   => \Encore\Admin\Grid\Displayers\SwitchGroup::class,
-            'select'        => \Encore\Admin\Grid\Displayers\Select::class,
-            'image'         => \Encore\Admin\Grid\Displayers\Image::class,
-            'label'         => \Encore\Admin\Grid\Displayers\Label::class,
-            'button'        => \Encore\Admin\Grid\Displayers\Button::class,
-            'link'          => \Encore\Admin\Grid\Displayers\Link::class,
-            'badge'         => \Encore\Admin\Grid\Displayers\Badge::class,
-            'progressBar'   => \Encore\Admin\Grid\Displayers\ProgressBar::class,
-            'radio'         => \Encore\Admin\Grid\Displayers\Radio::class,
-            'checkbox'      => \Encore\Admin\Grid\Displayers\Checkbox::class,
-            'orderable'     => \Encore\Admin\Grid\Displayers\Orderable::class,
+            'editable'    => \Encore\Admin\Grid\Displayers\Editable::class,
+            'switch'      => \Encore\Admin\Grid\Displayers\SwitchDisplay::class,
+            'switchGroup' => \Encore\Admin\Grid\Displayers\SwitchGroup::class,
+            'select'      => \Encore\Admin\Grid\Displayers\Select::class,
+            'image'       => \Encore\Admin\Grid\Displayers\Image::class,
+            'label'       => \Encore\Admin\Grid\Displayers\Label::class,
+            'button'      => \Encore\Admin\Grid\Displayers\Button::class,
+            'link'        => \Encore\Admin\Grid\Displayers\Link::class,
+            'badge'       => \Encore\Admin\Grid\Displayers\Badge::class,
+            'progressBar' => \Encore\Admin\Grid\Displayers\ProgressBar::class,
+            'radio'       => \Encore\Admin\Grid\Displayers\Radio::class,
+            'checkbox'    => \Encore\Admin\Grid\Displayers\Checkbox::class,
+            'orderable'   => \Encore\Admin\Grid\Displayers\Orderable::class,
         ];
 
         foreach ($map as $abstract => $class) {

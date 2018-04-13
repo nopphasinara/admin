@@ -3,6 +3,7 @@
 namespace Encore\Admin\Auth\Database;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -17,7 +18,7 @@ class Permission extends Model
      * @var array
      */
     public static $httpMethods = [
-        'GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'
+        'GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD',
     ];
 
     /**
@@ -39,9 +40,9 @@ class Permission extends Model
     /**
      * Permission belongs to many roles.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function roles()
+    public function roles() : BelongsToMany
     {
         $pivotTable = config('admin.database.role_permissions_table');
 
@@ -54,9 +55,10 @@ class Permission extends Model
      * If request should pass through the current permission.
      *
      * @param Request $request
+     *
      * @return bool
      */
-    public function shouldPassThrough(Request $request)
+    public function shouldPassThrough(Request $request) : bool
     {
         if (empty($this->http_method) && empty($this->http_path)) {
             return true;
@@ -65,7 +67,7 @@ class Permission extends Model
         $method = $this->http_method;
 
         $matches = array_map(function ($path) use ($method) {
-            $path = trim(config('admin.route.prefix'), '/').trim($path, '/');
+            $path = trim(config('admin.route.prefix'), '/').$path;
 
             if (Str::contains($path, ':')) {
                 list($method, $path) = explode(':', $path);
@@ -73,7 +75,6 @@ class Permission extends Model
             }
 
             return compact('method', 'path');
-
         }, explode("\r\n", $this->http_path));
 
         foreach ($matches as $match) {
@@ -90,11 +91,12 @@ class Permission extends Model
      *
      * @param array   $match
      * @param Request $request
+     *
      * @return bool
      */
-    protected function matchRequest(array $match, Request $request)
+    protected function matchRequest(array $match, Request $request) : bool
     {
-        if (! $request->is(trim($match['path'], '/'))) {
+        if (!$request->is(trim($match['path'], '/'))) {
             return false;
         }
 
@@ -111,12 +113,13 @@ class Permission extends Model
     public function setHttpMethodAttribute($method)
     {
         if (is_array($method)) {
-            $this->attributes['http_method'] = join(',', $method);
+            $this->attributes['http_method'] = implode(',', $method);
         }
     }
 
     /**
      * @param $method
+     *
      * @return array
      */
     public function getHttpMethodAttribute($method)
@@ -126,5 +129,19 @@ class Permission extends Model
         }
 
         return $method;
+    }
+
+    /**
+     * Detach models from the relationship.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            $model->roles()->detach();
+        });
     }
 }

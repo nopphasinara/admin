@@ -2,9 +2,74 @@
 
 All notable changes to `laravel-backup` will be documented in this file.
 
+# 5.6.1 - 2018-04-13
+
+- improved compatiblity with MariaDB
+- improved compatiblity with Google Drive
+
+# 5.6.0 - 2018-04-03
+- add `icon` and `username` to slack config
+
+# 5.5.1 - 2018-03-17
+- fix French translation
+
+# 5.5.0 - 2018-03-17
+- add Hindi translation
+
+# 5.4.1 - 2018-03-04
+- fix typo
+
+# 5.4.0 - 2018-03-01
+- add turkish translation
+
+# 5.3.0 - 2018-02-26
+- allow filtering on db name
+
+# 5.2.2 - 2018-02-23
+- fix typos in exception messages
+
+# 5.2.1 - 2018-02-08
+- add support for L5.6
+
+# 5.2.0 - 2018-02-06
+- add indonesian translation
+
+# 5.1.5 - 2018-01-20
+- more improvements to use correct exit codes
+
+# 5.1.4 - 2018-01-18
+- use correct exit codes
+
+# 5.1.3 - 2018-01-09
+- fix for apps using multiple dbs
+
+# 5.1.2 - 2017-11-26
+- use `config` instead of `env` to get the app name
+
+# 5.1.1 - 2017-11-03
+- fix deleting all backups when using maximum storage
+
+# 5.1.0 - 2017-11-01
+- add Italian translations
+
+# 5.0.5 - 2017-10-15
+- use all configuration keys when using `read` database connections
+
+# 5.0.4 - 2017-10-01
+- fix CleanupHasFailed application_name translations
+
+# 5.0.3 - 2017-09-29
+- use `APP_NAME` instead of `APP_URL` to name the backup
+
+# 5.0.2 - 2017-09-29
+- renamed temporary directory
+
+# 5.0.1 - 2017-09-26
+- type hint config contract instead of concreate config class on `EventHandler`
+
 # 5.0.0 - 2017-08-30
 - added support for Laravel 5.5, dropped support for older versions of the framework
-- renamed config file from `laravel-backup` to `backup`.
+- renamed config file from `laravel-backup` to `backup`
 
 # 4.19.2 - 2017-08-29
 - make sure the temp directory is empty before starting the backup

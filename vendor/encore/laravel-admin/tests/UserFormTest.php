@@ -46,7 +46,7 @@ class UserFormTest extends TestCase
             'password'              => '123456',
             'password_confirmation' => '123456',
             //"avatar"   => "test.jpg",
-            'profile'  => [
+            'profile' => [
                 'first_name' => 'John',
                 'last_name'  => 'Doe',
                 'postcode'   => '123456',
@@ -96,7 +96,7 @@ class UserFormTest extends TestCase
 
         $avatar = UserModel::first()->avatar;
 
-        $this->assertFileExists(public_path('upload/'.$avatar));
+        $this->assertFileExists(public_path('uploads/'.$avatar));
     }
 
     protected function seedsTable($count = 100)

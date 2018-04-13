@@ -2,10 +2,10 @@
 
 namespace Spatie\Backup\Notifications;
 
-use Illuminate\Config\Repository;
 use Spatie\Backup\Events\BackupHasFailed;
 use Illuminate\Notifications\Notification;
 use Spatie\Backup\Events\CleanupHasFailed;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
 use Spatie\Backup\Events\BackupWasSuccessful;
 use Spatie\Backup\Events\CleanupWasSuccessful;
@@ -15,7 +15,7 @@ use Spatie\Backup\Exceptions\NotificationCouldNotBeSent;
 
 class EventHandler
 {
-    /** @var \Illuminate\Config\Repository */
+    /** @var \Illuminate\Contracts\Config\Repository */
     protected $config;
 
     public function __construct(Repository $config)

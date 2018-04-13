@@ -26,7 +26,7 @@ class MultipleSelect extends Select
             return $this->otherKey;
         }
 
-        if (method_exists($this->form->model(), $this->column) &&
+        if (is_callable([$this->form->model(), $this->column]) &&
             ($relation = $this->form->model()->{$this->column}()) instanceof BelongsToMany
         ) {
             /* @var BelongsToMany $relation */
@@ -76,8 +76,10 @@ class MultipleSelect extends Select
         }
     }
 
-    public function prepare(array $value)
+    public function prepare($value)
     {
+        $value = (array) $value;
+
         return array_filter($value);
     }
 }

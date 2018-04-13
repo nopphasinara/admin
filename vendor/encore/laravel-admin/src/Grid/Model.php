@@ -85,6 +85,22 @@ class Model
         $this->model = $model;
 
         $this->queries = collect();
+
+//        static::doNotSnakeAttributes($this->model);
+    }
+
+    /**
+     * Don't snake case attributes.
+     *
+     * @param EloquentModel $model
+     *
+     * @return void
+     */
+    protected static function doNotSnakeAttributes(EloquentModel $model)
+    {
+        $class = get_class($model);
+
+        $class::$snakeAttributes = false;
     }
 
     /**
@@ -172,9 +188,11 @@ class Model
     /**
      * Build.
      *
-     * @return array
+     * @param bool $toArray
+     *
+     * @return array|Collection|mixed
      */
-    public function buildData()
+    public function buildData($toArray = true)
     {
         if (empty($this->data)) {
             $collection = $this->get();
@@ -183,10 +201,37 @@ class Model
                 $collection = call_user_func($this->collectionCallback, $collection);
             }
 
-            $this->data = $collection->toArray();
+            if ($toArray) {
+                $this->data = $collection->toArray();
+            } else {
+                $this->data = $collection;
+            }
         }
 
         return $this->data;
+    }
+
+    /**
+     * @param callable $callback
+     * @param int      $count
+     *
+     * @return bool
+     */
+    public function chunk($callback, $count = 100)
+    {
+        if ($this->usePaginate) {
+            return $this->buildData(false)->chunk($count)->each($callback);
+        }
+
+        $this->setSort();
+
+        $this->queries->reject(function ($query) {
+            return $query['method'] == 'paginate';
+        })->each(function ($query) {
+            $this->model = $this->model->{$query['method']}(...$query['arguments']);
+        });
+
+        return $this->model->chunk($count, $callback);
     }
 
     /**

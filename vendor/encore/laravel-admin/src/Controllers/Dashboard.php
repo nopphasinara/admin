@@ -20,11 +20,11 @@ class Dashboard
     public static function environment()
     {
         $envs = [
-            ['name' => 'PHP version',       'value' => "PHP/" . PHP_VERSION],
+            ['name' => 'PHP version',       'value' => 'PHP/'.PHP_VERSION],
             ['name' => 'Laravel version',   'value' => app()->version()],
             ['name' => 'CGI',               'value' => php_sapi_name()],
             ['name' => 'Uname',             'value' => php_uname()],
-            ['name' => 'Server',            'value' => $_SERVER['SERVER_SOFTWARE']],
+            ['name' => 'Server',            'value' => array_get($_SERVER, 'SERVER_SOFTWARE')],
 
             ['name' => 'Cache driver',      'value' => config('cache.default')],
             ['name' => 'Session driver',    'value' => config('session.driver')],
@@ -85,10 +85,10 @@ class Dashboard
                 'link' => 'https://github.com/laravel-admin-extensions/reporter',
                 'icon' => 'bug',
             ],
-            'translation' => [
-                'name' => 'laravel-admin-ext/translation',
-                'link' => 'https://github.com/laravel-admin-extensions/translation',
-                'icon' => 'language',
+            'redis-manager' => [
+                'name' => 'laravel-admin-ext/redis-manager',
+                'link' => 'https://github.com/laravel-admin-extensions/redis-manager',
+                'icon' => 'flask',
             ],
         ];
 
@@ -103,12 +103,12 @@ class Dashboard
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public static function packages()
+    public static function dependencies()
     {
         $json = file_get_contents(base_path('composer.json'));
 
-        $packages = json_decode($json, true)['require'];
+        $dependencies = json_decode($json, true)['require'];
 
-        return view('admin::dashboard.packages', compact('packages'));
+        return view('admin::dashboard.dependencies', compact('dependencies'));
     }
 }

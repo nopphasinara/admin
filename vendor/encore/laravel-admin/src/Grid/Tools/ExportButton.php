@@ -22,22 +22,23 @@ class ExportButton extends AbstractTool
      */
     protected function setUpScripts()
     {
-        $script = <<<SCRIPT
+        $script = <<<'SCRIPT'
 
-$('.export-selected').click(function () {
+$('.export-selected').click(function (e) {
+    e.preventDefault();
+    
     var rows = selectedRows().join(',');
     if (!rows) {
         return false;
     }
-
+    
     var href = $(this).attr('href').replace('__rows__', rows);
-    $(this).attr('href', href);
+    location.href = href;
 });
 
 SCRIPT;
 
         Admin::script($script);
-
     }
 
     /**
@@ -53,12 +54,12 @@ SCRIPT;
 
         $this->setUpScripts();
 
-        $export         = trans('admin.export');
-        $all            = trans('admin.all');
-        $currentPage    = trans('admin.current_page');
-        $selectedRows   = trans('admin.selected_rows');
+        $export = trans('admin.export');
+        $all = trans('admin.all');
+        $currentPage = trans('admin.current_page');
+        $selectedRows = trans('admin.selected_rows');
 
-        $page           = request('page', 1);
+        $page = request('page', 1);
 
         return <<<EOT
 

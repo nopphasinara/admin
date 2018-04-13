@@ -71,9 +71,7 @@ class PermissionController extends Controller
             $grid->name(trans('admin.name'));
 
             $grid->http_path(trans('admin.route'))->display(function ($path) {
-
                 return collect(explode("\r\n", $path))->map(function ($path) {
-
                     $method = $this->http_method ?: ['ANY'];
 
                     if (Str::contains($path, ':')) {
@@ -90,8 +88,7 @@ class PermissionController extends Controller
                     $path = '/'.trim(config('admin.route.prefix'), '/').$path;
 
                     return "<div style='margin-bottom: 5px;'>$method<code>$path</code></div>";
-                })->implode("");
-
+                })->implode('');
             });
 
             $grid->created_at(trans('admin.created_at'));
@@ -120,7 +117,7 @@ class PermissionController extends Controller
 
             $form->multipleSelect('http_method', trans('admin.http.method'))
                 ->options($this->getHttpMethodsOptions())
-                ->help('不选择默认为所有权限');
+                ->help(trans('admin.all_methods_if_empty'));
             $form->textarea('http_path', trans('admin.http.path'));
 
             $form->display('created_at', trans('admin.created_at'));

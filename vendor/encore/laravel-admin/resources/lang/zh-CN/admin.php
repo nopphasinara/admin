@@ -2,7 +2,7 @@
 
 return [
     'online'                => '在线',
-    'login'                 => '登陆',
+    'login'                 => '登录',
     'logout'                => '登出',
     'setting'               => '设置',
     'name'                  => '名称',
@@ -51,7 +51,7 @@ return [
     'update_succeeded'  => '更新成功 !',
     'save_succeeded'    => '保存成功 !',
     'refresh_succeeded' => '刷新成功 !',
-    'login_successful'  => '登陆成功 !',
+    'login_successful'  => '登录成功 !',
 
     'choose'       => '选择',
     'choose_file'  => '选择文件',
@@ -91,13 +91,22 @@ return [
         'method' => 'HTTP方法',
         'path'   => 'HTTP路径',
     ],
+    'all_methods_if_empty' => '为空默认为所有方法',
 
     'all'           => '全部',
     'current_page'  => '当前页',
     'selected_rows' => '选择的行',
 
-    'upload'        => '上传',
-    'new_folder'    => '新建文件夹',
-    'time'          => '时间',
-    'size'          => '大小',
+    'upload'     => '上传',
+    'new_folder' => '新建文件夹',
+    'time'       => '时间',
+    'size'       => '大小',
+
+    'listbox' => [
+        'text_total'         => '总共 {0} 项',
+        'text_empty'         => '空列表',
+        'filtered'           => '{0} / {1}',
+        'filter_clear'       => '显示全部',
+        'filter_placeholder' => '过滤',
+    ],
 ];

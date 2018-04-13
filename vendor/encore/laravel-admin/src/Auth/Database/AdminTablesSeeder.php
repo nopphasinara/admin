@@ -16,16 +16,16 @@ class AdminTablesSeeder extends Seeder
         // create a user.
         Administrator::truncate();
         Administrator::create([
-            'username'  => 'admin',
-            'password'  => bcrypt('admin'),
-            'name'      => 'Administrator',
+            'username' => 'admin',
+            'password' => bcrypt('admin'),
+            'name'     => 'Administrator',
         ]);
 
         // create a role.
         Role::truncate();
         Role::create([
-            'name'  => 'Administrator',
-            'slug'  => 'administrator',
+            'name' => 'Administrator',
+            'slug' => 'administrator',
         ]);
 
         // add role to user.
@@ -38,19 +38,19 @@ class AdminTablesSeeder extends Seeder
                 'name'        => 'All permission',
                 'slug'        => '*',
                 'http_method' => '',
-                'http_path'   => '*'
+                'http_path'   => '*',
             ],
             [
                 'name'        => 'Dashboard',
                 'slug'        => 'dashboard',
                 'http_method' => 'GET',
-                'http_path'   => '/'
+                'http_path'   => '/',
             ],
             [
                 'name'        => 'Login',
                 'slug'        => 'auth.login',
                 'http_method' => '',
-                'http_path'   => "/auth/login\r\n/auth/logout"
+                'http_path'   => "/auth/login\r\n/auth/logout",
             ],
             [
                 'name'        => 'User setting',
@@ -103,7 +103,7 @@ class AdminTablesSeeder extends Seeder
                 'parent_id' => 2,
                 'order'     => 5,
                 'title'     => 'Permission',
-                'icon'      => 'fa-user',
+                'icon'      => 'fa-ban',
                 'uri'       => 'auth/permissions',
             ],
             [

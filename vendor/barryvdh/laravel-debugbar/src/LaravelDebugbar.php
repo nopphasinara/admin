@@ -126,7 +126,7 @@ class LaravelDebugbar extends DebugBar
 
         /** @var Application $app */
         $app = $this->app;
-        
+
         // Set custom error handler
         if ($app['config']->get('debugbar.error_handler' , false)) {
             set_error_handler([$this, 'handleError']);
@@ -438,7 +438,7 @@ class LaravelDebugbar extends DebugBar
 
         if ($this->shouldCollect('auth', false)) {
             try {
-                $guards = array_keys($this->app['config']->get('auth.guards'));
+                $guards = array_keys($this->app['config']->get('auth.guards', []));
                 $authCollector = new MultiAuthCollector($app['auth'], $guards);
 
                 $authCollector->setShowName(
@@ -615,7 +615,7 @@ class LaravelDebugbar extends DebugBar
     public function modifyResponse(Request $request, Response $response)
     {
         $app = $this->app;
-        if ($app->runningInConsole() || !$this->isEnabled() || $this->isDebugbarRequest()) {
+        if (!$this->isEnabled() || $this->isDebugbarRequest()) {
             return $response;
         }
 
@@ -747,7 +747,14 @@ class LaravelDebugbar extends DebugBar
     public function isEnabled()
     {
         if ($this->enabled === null) {
-            $this->enabled = value($this->app['config']->get('debugbar.enabled'));
+            $config = $this->app['config'];
+            $configEnabled = value($config->get('debugbar.enabled'));
+
+            if ($configEnabled === null) {
+                $configEnabled = $config->get('app.debug');
+            }
+
+            $this->enabled = $configEnabled && !$this->app->runningInConsole() && !$this->app->environment('testing');
         }
 
         return $this->enabled;
@@ -1005,7 +1012,7 @@ class LaravelDebugbar extends DebugBar
                 case 'redis':
                     $connection = $config->get('debugbar.storage.connection');
                     $client = $this->app['redis']->connection($connection);
-                    if (is_a($client, 'Illuminate\Redis\Connections\PredisConnection', false)) {
+                    if (is_a($client, 'Illuminate\Redis\Connections\Connection', false)) {
                         $client = $client->client();
                     }
                     $storage = new RedisStorage($client);

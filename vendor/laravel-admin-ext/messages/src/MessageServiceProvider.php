@@ -2,7 +2,6 @@
 
 namespace Encore\Admin\Message;
 
-
 use Illuminate\Support\ServiceProvider;
 
 class MessageServiceProvider extends ServiceProvider
@@ -14,5 +13,7 @@ class MessageServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         }
+
+        Messages::boot();
     }
 }
