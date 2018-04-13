@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Location;
+use App\Models\ListingType;
 use App\Models\Painter;
 use App\Models\Painting;
 
@@ -13,18 +13,20 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
-use App\Admin\Helpers\LocationFormRender;
+use App\Admin\Helpers\ListingTypeFormRender;
 
-class LocationController extends Controller
+class ListingTypeController extends Controller
 {
     use ModelForm;
 
+    protected $modelName;
     protected $header;
     protected $description;
 
     public function __construct()
     {
-        $this->header = 'Locations';
+        $this->modelName = 'Listing Type';
+        $this->header = 'Listing Types';
         $this->description = '';
     }
 
@@ -54,7 +56,7 @@ class LocationController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('Edit Location');
+            $content->header('Edit ' . $this->modelName);
             $content->description($this->description);
 
             $content->body($this->form()->edit($id));
@@ -70,7 +72,7 @@ class LocationController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('Create Location');
+            $content->header('Create ' . $this->modelName);
             $content->description($this->description);
 
             $content->body($this->form());
@@ -84,7 +86,7 @@ class LocationController extends Controller
      */
     protected function grid()
     {
-        return Admin::grid(Location::class, function (Grid $grid) {
+        return Admin::grid(ListingType::class, function (Grid $grid) {
             // $grid->model()->where('id', '>', 100);
             // $grid->model()->orderBy('id', 'desc');
             // $grid->model()->take(100);
@@ -94,7 +96,6 @@ class LocationController extends Controller
             $grid->image('Thumbnail')->image('', 100, 100);
             $grid->featured('Featured')->sortable();
             $grid->visible('Visible')->sortable();
-            // $grid->order_no()->orderable();
             // $grid->title()->limit(30)->ucfirst()->substr(1, 10);
             // $grid->title()->editable('select', [1 => 'option1', 2 => 'option2', 3 => 'option3']);
 
@@ -106,9 +107,9 @@ class LocationController extends Controller
 
             $grid->paginate(30);
 
-            LocationController::filterGrid($grid);
-            LocationController::actionGrid($grid);
-            LocationController::disableTools(['grid' => $grid]);
+            ListingTypeController::filterGrid($grid);
+            ListingTypeController::actionGrid($grid);
+            ListingTypeController::disableTools(['grid' => $grid]);
         });
     }
 
@@ -151,7 +152,7 @@ class LocationController extends Controller
      */
     protected function form()
     {
-        return Admin::form(Location::class, function (Form $form) {
+        return Admin::form(ListingType::class, function (Form $form) {
             $form->display('id', 'ID');
             $form->text('name', 'Name')
                 ->rules('required', []);
@@ -185,7 +186,7 @@ class LocationController extends Controller
                 //
             });
 
-            LocationController::disableTools(['form' => $form]);
+            ListingTypeController::disableTools(['form' => $form]);
         });
     }
 

@@ -223,12 +223,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/z-song/laravel-admin.git",
-                "reference": "43df46122d884c09626730d154580496ce671212"
+                "reference": "c092c3e83fd9607f20c2d610fc6f80be8854a343"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/z-song/laravel-admin/zipball/43df46122d884c09626730d154580496ce671212",
-                "reference": "43df46122d884c09626730d154580496ce671212",
+                "url": "https://api.github.com/repos/z-song/laravel-admin/zipball/c092c3e83fd9607f20c2d610fc6f80be8854a343",
+                "reference": "c092c3e83fd9607f20c2d610fc6f80be8854a343",
                 "shasum": ""
             },
             "require": {
@@ -285,7 +285,7 @@
                 "grid",
                 "laravel"
             ],
-            "time": "2018-04-13T02:56:54+00:00"
+            "time": "2018-04-13T09:17:38+00:00"
         },
         {
             "name": "erusev/parsedown",

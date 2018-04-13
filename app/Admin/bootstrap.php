@@ -7,6 +7,7 @@ use App\Admin\Extensions\Column\Qrcode;
 use App\Admin\Extensions\Column\UrlWrapper;
 use App\Admin\Extensions\Form\WangEditor;
 use App\Admin\Extensions\Nav\Links;
+use App\Admin\Extensions\Nav\SearchBar;
 use Encore\Admin\Grid;
 use Encore\Admin\Form;
 use Encore\Admin\Facades\Admin;
@@ -42,6 +43,7 @@ Column::extend('prependIcon', function ($value, $icon) {
 
 Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
 
+    // $navbar->left(SearchBar::render());
     $navbar->left(view('admin.search-bar'));
 
     $navbar->right(new Links());

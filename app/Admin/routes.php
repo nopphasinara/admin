@@ -38,6 +38,7 @@ Route::group([
         'china/district'        => China\DistrictController::class,
 
         // Listing
+        'listing-types' => ListingTypeController::class,
         'locations' => LocationController::class,
     ]);
 
