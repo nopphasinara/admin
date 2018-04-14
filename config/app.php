@@ -150,7 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
-        // Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         // php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
 
         /*
@@ -210,7 +210,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        // 'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 
