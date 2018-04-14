@@ -12,5 +12,7 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('/listing-types', ListingTypeController::class);
+    $router->resource('/locations', LocationController::class);
+    $router->resource('/listings', ListingController::class);
 
 });
