@@ -14,15 +14,13 @@ class Issue2591_SeparateClassPreserveTest extends TestCase
 
     public function testChangedGlobalString()
     {
-        $value = 'Hello! I am changed from inside!';
-
-        $GLOBALS['globalString'] = $value;
-        $this->assertEquals($value, $GLOBALS['globalString']);
+        $GLOBALS['globalString'] = 'Hello!';
+        $this->assertEquals('Hello!', $GLOBALS['globalString']);
     }
 
     public function testGlobalString()
     {
-        $this->assertEquals('Hello', $GLOBALS['globalString']);
+        $this->assertEquals('Hello!', $GLOBALS['globalString']);
     }
 
 }

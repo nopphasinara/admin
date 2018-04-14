@@ -9,24 +9,22 @@ use PHPUnit\Framework\TestCase;
  */
 class BeforeAfterClassPidTest extends TestCase
 {
-    const PID_VARIABLE = 'current_pid';
-
     /**
      * @beforeClass
      */
     public static function showPidBefore()
     {
-        $GLOBALS[static::PID_VARIABLE] = getmypid();
+        $GLOBALS['PID_BEFORE'] = getmypid();
     }
 
-    public function testMethod1WithItsBeforeAndAfter()
+    public function testComparePids()
     {
-        $this->assertEquals($GLOBALS[static::PID_VARIABLE], getmypid());
+        $this->assertEquals($GLOBALS['PID_BEFORE'], getmypid());
     }
 
-    public function testMethod2WithItsBeforeAndAfter()
+    public function testThatClassDidNotReload()
     {
-        $this->assertEquals($GLOBALS[static::PID_VARIABLE], getmypid());
+        $this->assertEquals($GLOBALS['PID_BEFORE'], getmypid());
     }
 
     /**
@@ -34,10 +32,6 @@ class BeforeAfterClassPidTest extends TestCase
      */
     public static function showPidAfter()
     {
-        if ($GLOBALS[static::PID_VARIABLE] - getmypid() !== 0) {
-            echo "\n@afterClass output - PID difference should be zero!";
-        }
-
-        unset($GLOBALS[static::PID_VARIABLE]);
+        echo "\n@afterClass output - PID difference should be zero: " . ($GLOBALS['PID_BEFORE'] - getmypid());
     }
 }
