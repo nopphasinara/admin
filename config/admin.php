@@ -82,7 +82,7 @@ return [
     'database' => [
 
         // Database connection for following tables.
-        'connection' => '',
+        'connection' => 'mysql',
 
         // User tables and model.
         'users_table' => 'admin_users',
@@ -151,6 +151,15 @@ return [
      * Settings for extensions.
      */
     'extensions' => [
-
+        'media-manager' => [
+            'disk' => 'uploads',
+        ],
+        'api-tester' => [
+            'prefix' => 'api',
+            'guard'  => 'api',
+            'user_retriever' => function ($id) {
+                return \App\User::find($id);
+            },
+        ],
     ],
 ];
