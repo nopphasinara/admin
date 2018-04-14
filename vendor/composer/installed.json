@@ -3689,6 +3689,59 @@
         ]
     },
     {
+        "name": "spatie/eloquent-sortable",
+        "version": "3.4.2",
+        "version_normalized": "3.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/eloquent-sortable.git",
+            "reference": "36886c9da0500104df229b148453fd346400b146"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/eloquent-sortable/zipball/36886c9da0500104df229b148453fd346400b146",
+            "reference": "36886c9da0500104df229b148453fd346400b146",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/database": "~5.5.0|~5.6.0",
+            "illuminate/support": "~5.5.0|~5.6.0",
+            "php": ">=7.0"
+        },
+        "require-dev": {
+            "orchestra/testbench": "~3.5.0|~3.6.0",
+            "phpunit/phpunit": "^6.2|^7.0"
+        },
+        "time": "2018-02-07T23:13:36+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\EloquentSortable\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be"
+            }
+        ],
+        "description": "Sortable behaviour for eloquent models",
+        "homepage": "https://github.com/spatie/eloquent-sortable",
+        "keywords": [
+            "behaviour",
+            "eloquent",
+            "laravel",
+            "model",
+            "sort",
+            "sortable"
+        ]
+    },
+    {
         "name": "spatie/laravel-backup",
         "version": "5.6.1",
         "version_normalized": "5.6.1.0",
