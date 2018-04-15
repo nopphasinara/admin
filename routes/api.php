@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('api')->get('/features', '\App\Admin\Controllers\FeatureController@features');
+Route::middleware('api')->get('/features/{id}', '\App\Admin\Controllers\FeatureController@show');

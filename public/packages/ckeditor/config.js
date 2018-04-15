@@ -35,4 +35,8 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+
+    config.extraPlugins = 'cloudservices,filetools,ajax,xml';
+    config.cloudServices_tokenUrl = '/';
+    config.cloudServices_uploadUrl = '/uploads';
 };

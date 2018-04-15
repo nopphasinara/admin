@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use Illuminate\Support\Facades\Request;
 use App\Models\ListingType;
 
 use Encore\Admin\Form;
@@ -85,7 +86,9 @@ class ListingTypeController extends Controller
             $grid->disableExport();
             $grid->id('ID')->sortable();
             $grid->image('Image')->image('', 100, 100);
-            $grid->name('Name')->sortable();
+            $grid->column('name')->display(function () {
+                return '<a href="'. route('listing-types.edit', ['id' => $this->id]) .'">'. $this->name .'</a>';
+            })->sortable();
 
             $grid->column('Tools')->switchGroup([
                 'featured'    => 'Featured',

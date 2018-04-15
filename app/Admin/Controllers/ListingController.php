@@ -3,6 +3,9 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Listing;
+use App\Models\ListingType;
+use App\Models\Location;
+use App\Models\Feature;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -12,10 +15,12 @@ use Encore\Admin\Layout\Row;
 use Encore\Admin\Layout\Column;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 
 class ListingController extends Controller
 {
-    use ModelForm;
+    use ModelForm, SortableTrait;
 
     protected $model;
 
@@ -84,15 +89,37 @@ class ListingController extends Controller
 
             $grid->disableExport();
             $grid->id('ID')->sortable();
-            $grid->image('Image')->image('', 100, 100);
-            $grid->name('Name')->sortable();
+
+            $grid->image('Image')->display(function ($image) {
+                if (count($image)) {
+                    return $image[0];
+                }
+            })->image('', 100, 100);
+
+            $grid->column('name')->display(function () {
+                return '<a href="'. route('listings.edit', ['id' => $this->id]) .'">'. $this->name .'</a>';
+            })->sortable();
+
+            $grid->column('listing_type_id')->display(function () {
+                $listingType = ListingType::where('id', $this->listing_type_id)->select(['id', 'name'])->first();
+                return '<a href="'. route('listing-types.edit', ['id' => $this->listing_type_id]) .'">'. $listingType->name .'</a>';
+            })->sortable();
+
+            $grid->column('location_id')->display(function () {
+                $location = Location::where('id', $this->location_id)->select(['id', 'name'])->first();
+                return '<a href="'. route('locations.edit', ['id' => $this->location_id]) .'">'. $location->name .'</a>';
+            })->sortable();
 
             $grid->column('Tools')->switchGroup([
-                'featured'    => 'Featured',
-                'web_visible' => 'Visible',
+                'featured',
+                'web_visible',
+                'for_sale',
+                'for_rent',
             ], [
                 'featured' => json_decode(config('attribute_response'), true),
                 'web_visible' => json_decode(config('attribute_visible'), true),
+                'for_sale' => json_decode(config('attribute_response'), true),
+                'for_rent' => json_decode(config('attribute_response'), true),
             ]);
 
             $grid->created_at();
@@ -117,29 +144,60 @@ class ListingController extends Controller
     protected function form()
     {
         return Admin::form(Listing::class, function (Form $form) {
-
             // Form building
             $form->setWidth(10, 2);
             $form->hidden('id');
 
-            $form->text('name', 'Name')->rules('required|min:2');
-            $form->ckeditor('description', 'Description');
-            // $form->text('title')->rules(function ($form) {
-            //     if (!$id = $form->model()->id) {
-            //         return 'unique:users,email_address';
-            //     }
-            // });
+            $form->tab('Info', function ($form) {
+                $form->text('name', 'Name')->rules('required|min:2');
+                $form->textarea('description', 'Description');
+                $form->ckeditor('content', 'Content');
 
-            $form->divide();
+                $form->divide();
 
-            $form->image('image', 'Image')
-                ->uniqueName()
-                ->help('Allow only jpg, png')
-                ->removable();
+                $form->select('listing_type_id', 'Listing Type')->options(function () {
+                    $options = [];
+                    $data = ListingType::all()->toArray();
+                    foreach ($data as $key => $listingType) {
+                        $options[$listingType['id']] = $listingType['name'];
+                    }
+                    return $options;
+                });
 
-            $form->switch('featured', 'Featured');
-            $form->switch('web_visible', 'Visible');
+                $form->select('location_id', 'Location')->options(function () {
+                    $options = [];
+                    $data = Location::all()->toArray();
+                    foreach ($data as $key => $location) {
+                        $options[$location['id']] = $location['name'];
+                    }
+                    return $options;
+                });
 
+                $form->switch('for_sale')->states(json_decode(config('attribute_response'), true));
+                $form->currency('sale_price')->symbol('THB');
+                $form->switch('for_rent')->states(json_decode(config('attribute_response'), true));
+                $form->currency('rent_price')->symbol('THB');
+
+                $form->divide();
+
+                $form->multipleImage('image', 'Images')
+                    ->uniqueName()
+                    ->help('Allow only jpg, png')
+                    ->removable();
+
+                $form->switch('featured', 'Featured')->states(json_decode(config('attribute_response'), true));
+                $form->switch('web_visible', 'Visible')->states(json_decode(config('attribute_visible'), true));
+            })->tab('Featured & Facilities', function ($form) {
+                // $form->checkbox('zzz')->options([1 => 'foo', 2 => 'bar', 'val' => 'Option name']);
+                // $form->checkbox('featured')->options([1 => 'foo', 2 => 'bar', 'val' => 'Option name'])->stacked();
+
+                // $form->listbox('featured')->options([1 => 'foo', 2 => 'bar', 'val' => 'Option name']);
+
+                // $form->hasMany('featureds', function (Form\NestedForm $form) {
+                //     $form->text('id');
+                //     $form->text('name');
+                // });
+            });
 
             // Customize before save
             $form->saving(function (Form $form) {

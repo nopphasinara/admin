@@ -14,5 +14,7 @@ Route::group([
     $router->resource('/listing-types', ListingTypeController::class);
     $router->resource('/locations', LocationController::class);
     $router->resource('/listings', ListingController::class);
+    $router->resource('/features', FeatureController::class);
+    $router->resource('/facilities', FacilitiesController::class);
 
 });

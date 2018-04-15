@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// usage inside a laravel route
+// Route::get('/', function()
+// {
+//     $img = Image::make('foo.jpg')->resize(300, 200);
+//     return $img->response('jpg');
+// });
